@@ -509,10 +509,10 @@
         <span class="inv-ring inv-ring-2" aria-hidden="true"></span>
         <div class="inv-hero-inner">
             <div class="inv-brand">
-                <x-brand-logo variant="mark" :height="46" alt="FS Tech Systems" />
-                <span class="inv-brand-text ms-2" style="margin-left: 12px;">
-                    <strong style="font-size: 17px; letter-spacing: -0.01em;">FS Tech Systems</strong>
-                    <small style="color: rgba(255,255,255,0.7); font-size: 11px;">Software Engineering & System Architecture</small>
+                <x-brand-logo variant="mark" :height="58" alt="FS Tech Systems" />
+                <span class="inv-brand-text" style="margin-left: 15px;">
+                    <strong style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;">FS Tech Systems</strong>
+                    <small style="color: rgba(255,255,255,0.65); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; display: block; margin-top: 3px;">Software Engineering &amp; System Architecture</small>
                 </span>
             </div>
             <div class="inv-heading">
