@@ -327,33 +327,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px 24px 10px;
+            padding: 12px 28px 14px;
             border: 2px solid #e2e8f0;
-            border-radius: 14px;
+            border-radius: 16px;
             background: #ffffff;
             text-align: center;
-            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.08);
         }
         .inv-khqr-top {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 9px;
             margin-bottom: 6px;
         }
         .inv-khqr-pill {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 5px;
             background: #e11d48;
             color: #ffffff;
-            font-size: 11.5px;
+            font-size: 12.5px;
             font-weight: 800;
             letter-spacing: .08em;
             line-height: 1.2;
         }
         .inv-khqr-lbl {
-            font-size: 11.5px;
+            font-size: 12.5px;
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
@@ -363,32 +363,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
+            padding: 5px;
             background: #ffffff;
         }
         .inv-khqr-img {
-            max-height: 145px;
+            max-height: 215px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
-            border-radius: 6px;
+            border-radius: 8px;
         }
         .inv-khqr-foot {
-            margin-top: 6px;
-            line-height: 1.25;
+            margin-top: 7px;
+            line-height: 1.3;
         }
         .inv-khqr-name {
             display: block;
-            font-size: 13.5px;
+            font-size: 15px;
             font-weight: 800;
             color: #0f172a;
             letter-spacing: .02em;
         }
         .inv-khqr-note {
             display: block;
-            font-size: 10.5px;
+            font-size: 11px;
             color: #64748b;
-            margin-top: 1px;
+            margin-top: 2px;
             font-weight: 600;
         }
         .inv-totals-card {
@@ -917,14 +917,14 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                margin-top: 6px !important;
+                margin-top: 8px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 6px 20px 8px !important;
+                padding: 7px 24px 9px !important;
                 border: 1.5px solid #cbd5e1 !important;
-                border-radius: 10px !important;
+                border-radius: 12px !important;
                 background: #ffffff !important;
                 text-align: center !important;
                 display: flex !important;
@@ -932,6 +932,7 @@
                 align-items: center !important;
                 justify-content: center !important;
                 box-shadow: none !important;
+                flex-shrink: 1 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -939,12 +940,12 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 6px !important;
-                margin-bottom: 2px !important;
+                gap: 7px !important;
+                margin-bottom: 3px !important;
             }
             .inv-khqr-pill {
-                padding: 2px 8px !important;
-                font-size: 10px !important;
+                padding: 2.5px 9px !important;
+                font-size: 11px !important;
                 font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
@@ -952,25 +953,25 @@
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 10px !important;
+                font-size: 11px !important;
                 font-weight: 700 !important;
                 color: #475569 !important;
                 letter-spacing: .08em !important;
             }
             .inv-khqr-img {
-                max-height: 125px !important;
+                max-height: 175px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 3px !important;
+                margin-top: 4px !important;
             }
             .inv-khqr-name {
-                font-size: 12px !important;
+                font-size: 13.5px !important;
                 font-weight: 800 !important;
                 color: #0f172a !important;
             }
             .inv-khqr-note {
-                font-size: 9.5px !important;
+                font-size: 10px !important;
                 font-weight: 600 !important;
                 margin-top: 1px !important;
                 color: #64748b !important;
