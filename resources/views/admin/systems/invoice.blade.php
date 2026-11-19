@@ -601,7 +601,7 @@
                 break-after: avoid !important;
             }
             .inv-hero {
-                padding: 16px 24px 18px !important;
+                padding: 20px 28px 22px !important;
                 background: #0b0f24 !important;
                 background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%) !important;
                 -webkit-print-color-adjust: exact !important;
@@ -610,7 +610,7 @@
                 flex-shrink: 0 !important;
             }
             .inv-hero-accent {
-                height: 3px !important;
+                height: 4px !important;
                 background: #6366f1 !important;
                 background: linear-gradient(90deg, #6366f1, #8b5cf6 55%, #a855f7) !important;
                 -webkit-print-color-adjust: exact !important;
@@ -627,48 +627,55 @@
                 align-items: center !important;
             }
             .inv-brand img, .inv-brand .fst-brand-icon {
-                height: 56px !important;
+                height: 62px !important;
                 width: auto !important;
-                max-height: 56px !important;
+                max-height: 62px !important;
             }
             .inv-brand-text {
-                margin-left: 14px !important;
+                margin-left: 16px !important;
             }
             .inv-brand strong {
-                font-size: 23px !important;
+                font-size: 26px !important;
+                font-weight: 800 !important;
                 line-height: 1.1 !important;
+                color: #ffffff !important;
             }
             .inv-brand small {
-                font-size: 8.5px !important;
-                margin-top: 2px !important;
+                font-size: 9.5px !important;
+                font-weight: 700 !important;
+                letter-spacing: .12em !important;
+                margin-top: 3px !important;
+                color: rgba(255, 255, 255, .72) !important;
             }
             .inv-heading {
                 text-align: right !important;
                 margin-top: 0 !important;
             }
             .inv-doc {
-                font-size: 24px !important;
-                letter-spacing: .18em !important;
+                font-size: 28px !important;
+                font-weight: 800 !important;
+                letter-spacing: .2em !important;
                 color: #ffffff !important;
             }
             .inv-meta {
                 display: flex !important;
                 justify-content: flex-end !important;
-                margin-top: 4px !important;
-                font-size: 11px !important;
-                color: rgba(255, 255, 255, .8) !important;
+                margin-top: 5px !important;
+                font-size: 12px !important;
+                color: rgba(255, 255, 255, .85) !important;
             }
             .inv-meta-label {
-                font-size: 9.5px !important;
+                font-size: 10px !important;
             }
             .inv-meta-dot {
-                margin: 0 6px !important;
+                margin: 0 7px !important;
             }
             .inv-status {
-                margin-top: 5px !important;
-                padding: 3px 10px !important;
-                font-size: 9.5px !important;
-                border: 1px solid rgba(255, 255, 255, .25) !important;
+                margin-top: 6px !important;
+                padding: 4px 12px !important;
+                font-size: 10.5px !important;
+                font-weight: 700 !important;
+                border: 1px solid rgba(255, 255, 255, .28) !important;
             }
             .inv-status-pending {
                 background: #1e293b !important;
@@ -683,7 +690,7 @@
                 color: #fecaca !important;
             }
             .inv-body {
-                padding: 14px 24px 14px !important;
+                padding: 18px 28px 16px !important;
                 flex: 1 1 auto !important;
                 display: flex !important;
                 flex-direction: column !important;
@@ -694,7 +701,7 @@
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: stretch !important;
-                gap: 12px !important;
+                gap: 16px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -707,123 +714,134 @@
                 margin-left: 0 !important;
             }
             .inv-card {
-                padding: 8px 12px !important;
+                padding: 12px 16px !important;
                 background: #ffffff !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 10px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-card-head {
-                margin-bottom: 4px !important;
+                margin-bottom: 6px !important;
             }
             .inv-icon {
-                width: 20px !important;
-                height: 20px !important;
-                font-size: 10px !important;
-                margin-right: 6px !important;
-                border-radius: 5px !important;
+                width: 24px !important;
+                height: 24px !important;
+                font-size: 12px !important;
+                margin-right: 8px !important;
+                border-radius: 6px !important;
                 background: #eef2ff !important;
                 color: #4f46e5 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-card-label {
-                font-size: 9px !important;
-                letter-spacing: .08em !important;
+                font-size: 10.5px !important;
+                font-weight: 700 !important;
+                letter-spacing: .1em !important;
             }
             .inv-client-name, .inv-project-name {
-                font-size: 13px !important;
-                line-height: 1.2 !important;
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                line-height: 1.25 !important;
             }
             .inv-client-empty {
-                font-size: 11px !important;
+                font-size: 12px !important;
             }
             .inv-contact {
-                margin-top: 4px !important;
-                font-size: 10px !important;
-                line-height: 1.35 !important;
-                gap: 2px !important;
+                margin-top: 6px !important;
+                font-size: 11.5px !important;
+                line-height: 1.4 !important;
+                gap: 3px !important;
             }
             .inv-contact li {
-                margin-top: 2px !important;
-                gap: 4px !important;
+                margin-top: 3px !important;
+                gap: 5px !important;
             }
             .inv-contact li i {
-                width: 14px !important;
-                flex: 0 0 14px !important;
-                font-size: 10px !important;
+                width: 16px !important;
+                flex: 0 0 16px !important;
+                font-size: 11.5px !important;
             }
             .inv-tag-row {
-                margin-top: 3px !important;
+                margin-top: 4px !important;
             }
             .inv-tag {
-                padding: 2px 6px !important;
-                font-size: 8.5px !important;
+                padding: 3px 8px !important;
+                font-size: 10px !important;
+                font-weight: 700 !important;
             }
             .inv-desc {
-                margin: 3px 0 0 !important;
-                font-size: 10px !important;
-                line-height: 1.35 !important;
+                margin: 4px 0 0 !important;
+                font-size: 11.5px !important;
+                line-height: 1.4 !important;
             }
             .inv-terms {
-                margin-top: 3px !important;
-                padding-top: 3px !important;
+                margin-top: 4px !important;
+                padding-top: 4px !important;
             }
             .inv-terms p {
-                font-size: 9.5px !important;
+                font-size: 11px !important;
                 margin: 2px 0 0 !important;
             }
             .inv-section {
-                margin-top: 8px !important;
+                margin-top: 14px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-section-head {
-                margin-bottom: 3px !important;
+                margin-bottom: 5px !important;
                 break-after: avoid !important;
                 page-break-after: avoid !important;
             }
             .inv-section-head h2 {
-                font-size: 9.5px !important;
+                font-size: 11.5px !important;
+                font-weight: 800 !important;
+                letter-spacing: .12em !important;
             }
             .inv-section-meta {
-                font-size: 9.5px !important;
+                font-size: 11px !important;
+                font-weight: 600 !important;
             }
             .inv-table {
                 width: 100% !important;
             }
             .inv-table th {
-                padding: 3px 6px 4px !important;
-                font-size: 8.5px !important;
+                padding: 6px 8px 7px !important;
+                font-size: 10px !important;
+                font-weight: 800 !important;
+                letter-spacing: .08em !important;
             }
             .inv-table td {
-                padding: 4px 6px !important;
-                font-size: 10.5px !important;
+                padding: 6px 8px !important;
+                font-size: 12.5px !important;
             }
             .inv-table tr {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-index {
-                width: 28px !important;
-                font-size: 10px !important;
+                width: 32px !important;
+                font-size: 11.5px !important;
+                font-weight: 700 !important;
             }
             .inv-item-title {
-                font-size: 11px !important;
+                font-size: 13.5px !important;
+                font-weight: 700 !important;
             }
             .inv-item-sub {
-                margin-top: 1px !important;
-                font-size: 9px !important;
-                line-height: 1.2 !important;
+                margin-top: 2px !important;
+                font-size: 10.5px !important;
+                line-height: 1.25 !important;
             }
             .inv-amount {
-                font-size: 11.5px !important;
+                font-size: 13.5px !important;
+                font-weight: 700 !important;
             }
             .inv-summary {
                 display: flex !important;
                 justify-content: flex-end !important;
-                margin-top: 6px !important;
+                margin-top: 8px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -832,8 +850,8 @@
                 flex-direction: row !important;
                 align-items: stretch !important;
                 justify-content: space-between !important;
-                gap: 12px !important;
-                margin-top: 6px !important;
+                gap: 14px !important;
+                margin-top: 12px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -843,19 +861,19 @@
             .inv-stages-card {
                 flex: 1 1 0 !important;
                 min-width: 0 !important;
-                padding: 4px 8px !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                padding: 8px 12px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 10px !important;
                 background: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-totals-card {
-                flex: 0 0 250px !important;
-                padding: 5px 10px 5px !important;
+                flex: 0 0 280px !important;
+                padding: 8px 14px !important;
                 background: #f8fafc !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 10px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -863,14 +881,14 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                margin-top: 5px !important;
+                margin-top: 10px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 4px 14px 5px !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                padding: 8px 24px 10px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 12px !important;
                 background: #ffffff !important;
                 text-align: center !important;
                 display: flex !important;
@@ -885,12 +903,12 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 5px !important;
-                margin-bottom: 2px !important;
+                gap: 6px !important;
+                margin-bottom: 4px !important;
             }
             .inv-khqr-pill {
-                padding: 1.5px 6px !important;
-                font-size: 8px !important;
+                padding: 2.5px 8px !important;
+                font-size: 9.5px !important;
                 font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
@@ -898,58 +916,61 @@
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 8px !important;
+                font-size: 9.5px !important;
                 font-weight: 700 !important;
             }
             .inv-khqr-img {
-                max-height: 76px !important;
+                max-height: 140px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 2px !important;
+                margin-top: 4px !important;
             }
             .inv-khqr-name {
-                font-size: 9.5px !important;
+                font-size: 11.5px !important;
                 font-weight: 800 !important;
             }
             .inv-khqr-note {
-                font-size: 7.5px !important;
-                margin-top: 0 !important;
+                font-size: 9px !important;
+                font-weight: 600 !important;
+                margin-top: 1px !important;
             }
             .inv-summary-card {
-                width: 280px !important;
-                padding: 6px 10px 6px !important;
+                width: 290px !important;
+                padding: 8px 12px !important;
                 background: #f8fafc !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 10px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-sum-row {
-                padding: 1.5px 0 !important;
-                font-size: 10.5px !important;
+                padding: 2.5px 0 !important;
+                font-size: 12px !important;
             }
             .inv-sum-row strong {
-                font-size: 11.5px !important;
+                font-size: 13px !important;
             }
             .inv-sum-divider {
                 height: 1px !important;
-                margin: 4px 0 !important;
+                margin: 5px 0 !important;
             }
             .inv-balance {
-                padding: 5px 8px !important;
-                border-radius: 6px !important;
+                padding: 7px 12px !important;
+                border-radius: 8px !important;
                 background: #0f172a !important;
                 color: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-balance span {
-                font-size: 9px !important;
-                color: rgba(255, 255, 255, .85) !important;
+                font-size: 10.5px !important;
+                font-weight: 700 !important;
+                color: rgba(255, 255, 255, .88) !important;
             }
             .inv-balance strong {
-                font-size: 14px !important;
+                font-size: 17px !important;
+                font-weight: 800 !important;
                 color: #ffffff !important;
             }
             .inv-balance-paid {
@@ -967,51 +988,54 @@
                 color: #ffffff !important;
             }
             .inv-sum-note {
-                margin-top: 3px !important;
-                font-size: 8px !important;
+                margin-top: 4px !important;
+                font-size: 9px !important;
             }
             .inv-table-stages td {
-                padding: 3px 6px !important;
-                font-size: 9.5px !important;
+                padding: 4px 6px !important;
+                font-size: 11px !important;
             }
             .inv-stage-name {
-                font-size: 10px !important;
+                font-size: 11.5px !important;
+                font-weight: 600 !important;
             }
             .inv-chip {
-                padding: 1.5px 5px !important;
-                font-size: 7.5px !important;
+                padding: 2px 7px !important;
+                font-size: 8.5px !important;
+                font-weight: 700 !important;
             }
             .inv-stage-date {
-                font-size: 7.5px !important;
+                font-size: 8.5px !important;
                 margin-top: 1px !important;
             }
             .inv-note {
-                margin-top: 6px !important;
-                padding: 5px 8px !important;
+                margin-top: 10px !important;
+                padding: 8px 12px !important;
                 background: #f8fafc !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 6px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 8px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-note-icon {
-                width: 18px !important;
-                height: 18px !important;
-                font-size: 9px !important;
-                margin-right: 6px !important;
-                border-radius: 4px !important;
+                width: 22px !important;
+                height: 22px !important;
+                font-size: 11px !important;
+                margin-right: 8px !important;
+                border-radius: 6px !important;
             }
             .inv-note-title {
-                font-size: 8px !important;
-                margin-bottom: 1px !important;
+                font-size: 9.5px !important;
+                font-weight: 700 !important;
+                margin-bottom: 2px !important;
             }
             .inv-note-body {
-                font-size: 9.5px !important;
-                line-height: 1.25 !important;
+                font-size: 11.5px !important;
+                line-height: 1.35 !important;
             }
             .inv-footer {
                 margin-top: auto !important;
-                padding-top: 6px !important;
+                padding-top: 10px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -1020,20 +1044,22 @@
                 flex-direction: row !important;
                 justify-content: space-between !important;
                 align-items: flex-end !important;
-                padding-top: 6px !important;
-                border-top: 1px solid #cbd5e1 !important;
+                padding-top: 8px !important;
+                border-top: 1.5px solid #cbd5e1 !important;
             }
             .inv-thanks {
-                font-size: 11px !important;
+                font-size: 13px !important;
+                font-weight: 700 !important;
             }
             .inv-footer-meta {
-                margin-top: 2px !important;
-                font-size: 8.5px !important;
+                margin-top: 3px !important;
+                font-size: 10px !important;
                 line-height: 1.35 !important;
             }
             .inv-footer-ref {
                 margin-top: 0 !important;
-                font-size: 8.5px !important;
+                font-size: 9.5px !important;
+                font-weight: 700 !important;
             }
             .no-print {
                 display: none !important;
