@@ -453,32 +453,104 @@
         }
         @keyframes invSpin { to { transform: rotate(360deg); } }
 
-        @page { size: A4 portrait; margin: 0; }
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
 
         @media print {
-            body {
-                padding: 0 !important;
+            html, body {
+                width: 210mm !important;
+                height: 297mm !important;
                 margin: 0 !important;
+                padding: 0 !important;
                 background: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
             .invoice-sheet {
-                width: 100% !important;
-                max-width: 210mm !important;
+                width: 210mm !important;
                 min-height: 297mm !important;
-                margin: 0 auto !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                margin: 0 !important;
+                border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
+                display: flex !important;
+                flex-direction: column !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
             .inv-hero {
+                padding: 26px 32px 30px !important;
                 background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
-            .no-print { display: none !important; }
-            .inv-card, .inv-note, .inv-summary, .inv-parties, .inv-footer { break-inside: avoid; page-break-inside: avoid; }
-            .inv-section-head { break-after: avoid; page-break-after: avoid; }
+            .inv-hero-accent {
+                background: linear-gradient(90deg, #6366f1, #8b5cf6 55%, #a855f7) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-card {
+                background: #ffffff !important;
+                border: 1px solid #e6eaf2 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-icon {
+                background: #eef2ff !important;
+                color: #4f46e5 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-summary-card {
+                background: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-balance {
+                background: #f1f5f9 !important;
+                border: 1px solid #cbd5e1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-status-pending {
+                background: rgba(148, 163, 184, .25) !important;
+                border-color: rgba(203, 213, 225, .45) !important;
+                color: #cbd5e1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-status-paid {
+                background: rgba(16, 185, 129, .25) !important;
+                border-color: rgba(52, 211, 153, .45) !important;
+                color: #6ee7b7 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-status-due {
+                background: rgba(248, 113, 113, .25) !important;
+                border-color: rgba(252, 165, 165, .45) !important;
+                color: #fca5a5 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-body {
+                padding: 24px 32px 20px !important;
+                flex: 1 1 auto !important;
+            }
+            .inv-footer {
+                margin-top: auto !important;
+                padding-top: 18px !important;
+            }
+            .no-print {
+                display: none !important;
+            }
         }
 
         @media (max-width: 760px) {
