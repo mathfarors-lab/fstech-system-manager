@@ -493,6 +493,40 @@
         .inv-thanks { font-size: 15px; font-weight: 700; color: #1e293b; }
         .inv-footer-meta { margin-top: 5px; font-size: 12px; color: #475569; }
         .inv-footer-ref { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #475569; }
+        .inv-footer-qrs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .inv-footer-qr-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 4px 6px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .inv-footer-qr-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        .inv-footer-qr-item img {
+            height: 54px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .inv-footer-qr-item span {
+            font-size: 9px;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-top: 3px;
+            letter-spacing: .02em;
+        }
 
         .inv-actions {
             position: fixed;
@@ -1065,6 +1099,33 @@
                 font-size: 9.5px !important;
                 font-weight: 700 !important;
             }
+            .inv-footer-qrs {
+                display: flex !important;
+                align-items: center !important;
+                gap: 10px !important;
+            }
+            .inv-footer-qr-item {
+                display: inline-flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 2px 4px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-footer-qr-item img {
+                height: 48px !important;
+                width: auto !important;
+            }
+            .inv-footer-qr-item span {
+                font-size: 8px !important;
+                font-weight: 700 !important;
+                color: #4f46e5 !important;
+                margin-top: 1px !important;
+            }
             .no-print {
                 display: none !important;
             }
@@ -1333,19 +1394,31 @@
 
         <footer class="inv-footer">
             <div class="inv-footer-inner" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-                <div>
+                <div style="flex: 1 1 auto; min-width: 240px;">
                     <div class="inv-thanks">{{ $paid ? 'Thank you — this invoice is settled in full.' : 'Thank you for your business.' }}</div>
                     <div class="inv-footer-meta" style="margin-top: 6px; line-height: 1.6;">
                         <strong>FS Tech Systems</strong> · Professional Digital Solutions<br>
                         <span><i class="bi bi-telephone-fill" style="margin-right: 4px;"></i> 0967444964</span>
                         <span style="margin: 0 8px;">·</span>
-                        <span><i class="bi bi-envelope-fill" style="margin-right: 4px;"></i> mathfarors@gmail.com</span>
-                        <span style="margin: 0 8px;">·</span>
+                        <span><i class="bi bi-envelope-fill" style="margin-right: 4px;"></i> mathfarors@gmail.com</span><br>
                         <span><i class="bi bi-telegram" style="margin-right: 4px;"></i> t.me/farors07</span>
                         <span style="margin: 0 8px;">·</span>
                         <span><i class="bi bi-facebook" style="margin-right: 4px;"></i> FS Tech Systems</span>
                     </div>
                 </div>
+
+                {{-- Official Channels QR Codes (Telegram & Facebook) --}}
+                <div class="inv-footer-qrs">
+                    <a href="https://t.me/farors07" target="_blank" rel="noopener" class="inv-footer-qr-item" title="Scan or click to open Telegram">
+                        <img src="{{ asset('images/telegram-qr.png') }}" alt="Telegram QR">
+                        <span>Telegram</span>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener" class="inv-footer-qr-item" title="Scan or click to open Facebook Page">
+                        <img src="{{ asset('images/facebook-qr.png') }}" alt="Facebook QR">
+                        <span>Facebook</span>
+                    </a>
+                </div>
+
                 <div style="text-align: right;">
                     <div class="inv-footer-ref">{{ $invoiceNo }}</div>
                     <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Generated {{ now()->format('M j, Y') }}</div>

@@ -423,6 +423,32 @@
                                     <a href="mailto:mathfarors@gmail.com">mathfarors@gmail.com</a>
                                 </div>
                             </div>
+
+                            {{-- Official Channels QR Codes --}}
+                            <div class="lp-contact-qrs mt-3 pt-3" style="border-top: 1px solid rgba(255, 255, 255, 0.15);">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #e9d5ff;">
+                                        <i class="bi bi-qr-code-scan me-1"></i> Scan to connect
+                                    </span>
+                                    <small style="font-size: 0.72rem; color: rgba(255,255,255,0.6);">Direct channels</small>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <a href="https://t.me/farors07" target="_blank" rel="noopener" class="d-block text-center p-2 rounded-3 text-decoration-none shadow-sm" style="background: rgba(255, 255, 255, 0.95); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                                            <img src="{{ asset('images/telegram-qr.png') }}" alt="Telegram QR" class="img-fluid rounded" style="max-height: 115px; width: auto; object-fit: contain;">
+                                            <span class="d-block mt-1 fw-bold text-dark" style="font-size: 0.8rem;">Telegram</span>
+                                            <small class="d-block text-muted" style="font-size: 0.7rem;">@farors07</small>
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="https://facebook.com" target="_blank" rel="noopener" class="d-block text-center p-2 rounded-3 text-decoration-none shadow-sm" style="background: rgba(255, 255, 255, 0.95); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                                            <img src="{{ asset('images/facebook-qr.png') }}" alt="Facebook Page QR" class="img-fluid rounded" style="max-height: 115px; width: auto; object-fit: contain;">
+                                            <span class="d-block mt-1 fw-bold text-dark" style="font-size: 0.8rem;">Facebook Page</span>
+                                            <small class="d-block text-muted" style="font-size: 0.7rem;">FS Tech Systems</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

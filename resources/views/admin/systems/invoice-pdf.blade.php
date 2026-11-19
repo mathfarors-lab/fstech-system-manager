@@ -206,17 +206,27 @@ $payMoney = function ($amount, $cur) {
     </table>
 
     {{-- Provider & Brand Contact Info --}}
-    <table class="noborder" style="margin-top:14px; padding-top:8px; border-top:1px solid #e5e7eb; width:100%; page-break-inside:avoid">
+    <table class="noborder" style="margin-top:10px; padding-top:6px; border-top:1px solid #e5e7eb; width:100%; page-break-inside:avoid">
         <tr>
-            <td class="noborder" style="width:60%">
+            <td class="noborder" style="width:52%; vertical-align:middle">
                 <strong style="color:#4f46e5; font-size:11px">FS Tech Systems</strong><br>
-                <span class="muted" style="font-size:9px">Professional Software & Digital Solutions</span><br>
-                <span style="font-size:9px; color:#4b5563">
+                <span class="muted" style="font-size:8.5px">Professional Software & Digital Solutions</span><br>
+                <span style="font-size:8.5px; color:#4b5563">
                     Phone: 0967444964 &nbsp;|&nbsp; Email: mathfarors@gmail.com<br>
-                    Telegram: https://t.me/farors07 &nbsp;|&nbsp; Facebook: FS Tech Systems
+                    Telegram: @farors07 &nbsp;|&nbsp; Facebook: FS Tech Systems
                 </span>
             </td>
-            <td class="noborder right" style="width:40%; vertical-align:bottom">
+            <td class="noborder" style="width:26%; vertical-align:middle; text-align:center">
+                <div style="display:inline-block; margin-right:6px; text-align:center">
+                    <img src="{{ str_replace('\\', '/', public_path('images/telegram-qr.png')) }}" style="height:44px; width:auto; display:block; margin:0 auto">
+                    <span style="font-size:6.5px; color:#4f46e5; font-weight:bold; display:block; margin-top:1px">Telegram</span>
+                </div>
+                <div style="display:inline-block; text-align:center">
+                    <img src="{{ str_replace('\\', '/', public_path('images/facebook-qr.png')) }}" style="height:44px; width:auto; display:block; margin:0 auto">
+                    <span style="font-size:6.5px; color:#4f46e5; font-weight:bold; display:block; margin-top:1px">Facebook</span>
+                </div>
+            </td>
+            <td class="noborder right" style="width:22%; vertical-align:middle">
                 <span class="muted" style="font-size:8px">Generated on {{ now()->format('M j, Y') }}</span><br>
                 <strong style="font-size:9px">{{ $invoiceNo }}</strong>
             </td>
