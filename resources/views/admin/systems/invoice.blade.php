@@ -327,7 +327,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px 16px;
+            padding: 16px 36px 20px;
             border: 2px solid #e2e8f0;
             border-radius: 18px;
             background: #ffffff;
@@ -343,17 +343,17 @@
         }
         .inv-khqr-pill {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 6px;
             background: #e11d48;
             color: #ffffff;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
             letter-spacing: .08em;
             line-height: 1.2;
         }
         .inv-khqr-lbl {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
@@ -363,32 +363,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
+            padding: 6px;
             background: #ffffff;
         }
         .inv-khqr-img {
-            max-height: 200px;
+            max-height: 270px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
             border-radius: 8px;
         }
         .inv-khqr-foot {
-            margin-top: 8px;
-            line-height: 1.3;
+            margin-top: 10px;
+            line-height: 1.35;
         }
         .inv-khqr-name {
             display: block;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 800;
             color: #0f172a;
             letter-spacing: .02em;
         }
         .inv-khqr-note {
             display: block;
-            font-size: 11px;
+            font-size: 12px;
             color: #64748b;
-            margin-top: 2px;
+            margin-top: 3px;
             font-weight: 600;
         }
         .inv-totals-card {
@@ -503,28 +503,28 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            padding: 4px 6px;
-            border-radius: 8px;
+            padding: 5px 8px;
+            border-radius: 10px;
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             transition: transform .15s ease, box-shadow .15s ease;
         }
         .inv-footer-qr-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
         }
         .inv-footer-qr-item img {
-            height: 54px;
+            height: 78px;
             width: auto;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
         }
         .inv-footer-qr-item span {
-            font-size: 9px;
+            font-size: 10.5px;
             font-weight: 700;
             color: #4f46e5;
-            margin-top: 3px;
+            margin-top: 4px;
             letter-spacing: .02em;
         }
 
@@ -920,7 +920,7 @@
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 10px 28px 12px !important;
+                padding: 10px 32px 12px !important;
                 border: 2px solid #cbd5e1 !important;
                 border-radius: 14px !important;
                 background: #ffffff !important;
@@ -941,8 +941,8 @@
                 margin-bottom: 4px !important;
             }
             .inv-khqr-pill {
-                padding: 2.5px 9px !important;
-                font-size: 11px !important;
+                padding: 3px 11px !important;
+                font-size: 12px !important;
                 font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
@@ -950,25 +950,25 @@
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 11px !important;
+                font-size: 12px !important;
                 font-weight: 700 !important;
                 color: #475569 !important;
                 letter-spacing: .08em !important;
             }
             .inv-khqr-img {
-                max-height: 180px !important;
+                max-height: 235px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 5px !important;
+                margin-top: 6px !important;
             }
             .inv-khqr-name {
-                font-size: 13px !important;
+                font-size: 14.5px !important;
                 font-weight: 800 !important;
                 color: #0f172a !important;
             }
             .inv-khqr-note {
-                font-size: 10px !important;
+                font-size: 10.5px !important;
                 font-weight: 600 !important;
                 margin-top: 1px !important;
                 color: #64748b !important;
@@ -1102,29 +1102,29 @@
             .inv-footer-qrs {
                 display: flex !important;
                 align-items: center !important;
-                gap: 10px !important;
+                gap: 12px !important;
             }
             .inv-footer-qr-item {
                 display: inline-flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                padding: 2px 4px !important;
+                padding: 3px 6px !important;
                 border: 1px solid #cbd5e1 !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
                 background: #ffffff !important;
                 box-shadow: none !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-footer-qr-item img {
-                height: 48px !important;
+                height: 68px !important;
                 width: auto !important;
             }
             .inv-footer-qr-item span {
-                font-size: 8px !important;
+                font-size: 9px !important;
                 font-weight: 700 !important;
                 color: #4f46e5 !important;
-                margin-top: 1px !important;
+                margin-top: 2px !important;
             }
             .no-print {
                 display: none !important;
