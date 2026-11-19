@@ -456,13 +456,25 @@
         @page { size: A4 portrait; margin: 0; }
 
         @media print {
-            body { padding: 0; background: #ffffff; }
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
             .invoice-sheet {
-                width: 210mm;
-                min-height: 297mm;
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
+                width: 100% !important;
+                max-width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 auto !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .inv-hero {
+                background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .no-print { display: none !important; }
             .inv-card, .inv-note, .inv-summary, .inv-parties, .inv-footer { break-inside: avoid; page-break-inside: avoid; }
@@ -732,8 +744,7 @@
 <div class="inv-actions no-print" role="toolbar" aria-label="Invoice actions">
     <a href="{{ route('systems.show', [$system, 'tab' => 'finance']) }}" class="inv-btn"><i class="bi bi-arrow-left"></i>Back</a>
     <button type="button" class="inv-btn" id="saveImageBtn" onclick="fstSaveInvoiceImage(this)"><i class="bi bi-image"></i>Save image</button>
-    <a href="{{ route('systems.invoice.pdf', $system) }}" class="inv-btn"><i class="bi bi-file-earmark-pdf"></i>PDF</a>
-    <button type="button" class="inv-btn inv-btn-primary" onclick="window.print()"><i class="bi bi-printer"></i>Print invoice</button>
+    <button type="button" class="inv-btn inv-btn-primary" onclick="window.print()"><i class="bi bi-printer"></i>Print / Save as PDF</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
