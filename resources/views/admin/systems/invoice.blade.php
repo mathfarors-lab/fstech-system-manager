@@ -320,42 +320,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 12px;
+            margin-top: 14px;
         }
         .inv-khqr-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px 14px 10px;
-            border: 1px solid #e6eaf2;
-            border-radius: 14px;
+            padding: 10px 22px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
             background: #ffffff;
             text-align: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
         }
         .inv-khqr-top {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            margin-bottom: 5px;
+            gap: 8px;
+            margin-bottom: 7px;
         }
         .inv-khqr-pill {
             display: inline-block;
-            padding: 2px 7px;
+            padding: 3px 10px;
             border-radius: 5px;
             background: #e11d48;
             color: #ffffff;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 800;
             letter-spacing: .08em;
             line-height: 1.2;
         }
         .inv-khqr-lbl {
-            font-size: 10px;
-            font-weight: 600;
-            color: #64748b;
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
             text-transform: uppercase;
             letter-spacing: .06em;
         }
@@ -363,32 +363,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2px;
+            padding: 3px;
             background: #ffffff;
         }
         .inv-khqr-img {
-            max-height: 90px;
+            max-height: 135px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
         }
         .inv-khqr-foot {
-            margin-top: 5px;
-            line-height: 1.2;
+            margin-top: 7px;
+            line-height: 1.25;
         }
         .inv-khqr-name {
             display: block;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 800;
             color: #0f172a;
             letter-spacing: .02em;
         }
         .inv-khqr-note {
             display: block;
-            font-size: 9px;
+            font-size: 10px;
             color: #64748b;
             margin-top: 2px;
+            font-weight: 500;
         }
         .inv-totals-card {
             flex: 0 0 320px;
@@ -626,19 +627,19 @@
                 align-items: center !important;
             }
             .inv-brand img, .inv-brand .fst-brand-icon {
-                height: 48px !important;
+                height: 56px !important;
                 width: auto !important;
-                max-height: 48px !important;
+                max-height: 56px !important;
             }
             .inv-brand-text {
-                margin-left: 12px !important;
+                margin-left: 14px !important;
             }
             .inv-brand strong {
-                font-size: 19px !important;
+                font-size: 23px !important;
                 line-height: 1.1 !important;
             }
             .inv-brand small {
-                font-size: 7.5px !important;
+                font-size: 8.5px !important;
                 margin-top: 2px !important;
             }
             .inv-heading {
@@ -646,27 +647,27 @@
                 margin-top: 0 !important;
             }
             .inv-doc {
-                font-size: 20px !important;
-                letter-spacing: .16em !important;
+                font-size: 24px !important;
+                letter-spacing: .18em !important;
                 color: #ffffff !important;
             }
             .inv-meta {
                 display: flex !important;
                 justify-content: flex-end !important;
                 margin-top: 4px !important;
-                font-size: 10.5px !important;
+                font-size: 11px !important;
                 color: rgba(255, 255, 255, .8) !important;
             }
             .inv-meta-label {
-                font-size: 9px !important;
+                font-size: 9.5px !important;
             }
             .inv-meta-dot {
                 margin: 0 6px !important;
             }
             .inv-status {
                 margin-top: 5px !important;
-                padding: 3px 9px !important;
-                font-size: 9px !important;
+                padding: 3px 10px !important;
+                font-size: 9.5px !important;
                 border: 1px solid rgba(255, 255, 255, .25) !important;
             }
             .inv-status-pending {
@@ -862,14 +863,14 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                margin-top: 4px !important;
+                margin-top: 5px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 3px 8px 4px !important;
+                padding: 4px 14px 5px !important;
                 border: 1px solid #cbd5e1 !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
                 background: #ffffff !important;
                 text-align: center !important;
                 display: flex !important;
@@ -884,32 +885,35 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 4px !important;
+                gap: 5px !important;
                 margin-bottom: 2px !important;
             }
             .inv-khqr-pill {
-                padding: 1px 4px !important;
-                font-size: 7px !important;
+                padding: 1.5px 6px !important;
+                font-size: 8px !important;
+                font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 7px !important;
+                font-size: 8px !important;
+                font-weight: 700 !important;
             }
             .inv-khqr-img {
-                max-height: 56px !important;
+                max-height: 76px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 1px !important;
+                margin-top: 2px !important;
             }
             .inv-khqr-name {
-                font-size: 8px !important;
+                font-size: 9.5px !important;
+                font-weight: 800 !important;
             }
             .inv-khqr-note {
-                font-size: 6.5px !important;
+                font-size: 7.5px !important;
                 margin-top: 0 !important;
             }
             .inv-summary-card {
@@ -1081,20 +1085,20 @@
         <span class="inv-ring inv-ring-2" aria-hidden="true"></span>
         <div class="inv-hero-inner">
             <div class="inv-brand">
-                <x-brand-logo variant="mark" :height="76" alt="FS Tech Systems" />
-                <span class="inv-brand-text" style="margin-left: 18px;">
-                    <strong style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;">FS Tech Systems</strong>
-                    <small style="color: rgba(255,255,255,0.6); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; display: block; margin-top: 4px;">Software Engineering &amp; System Architecture</small>
+                <x-brand-logo variant="mark" :height="88" alt="FS Tech Systems" />
+                <span class="inv-brand-text" style="margin-left: 20px;">
+                    <strong style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;">FS Tech Systems</strong>
+                    <small style="color: rgba(255,255,255,0.72); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; display: block; margin-top: 5px;">Software Engineering &amp; System Architecture</small>
                 </span>
             </div>
             <div class="inv-heading">
-                <div class="inv-doc">Invoice</div>
-                <div class="inv-meta">
-                    <span><span class="inv-meta-label">No.</span> {{ $invoiceNo }}</span>
+                <div class="inv-doc" style="font-size: 36px; letter-spacing: .22em;">Invoice</div>
+                <div class="inv-meta" style="font-size: 13.5px; margin-top: 10px;">
+                    <span><span class="inv-meta-label" style="font-size: 11.5px;">No.</span> {{ $invoiceNo }}</span>
                     <span class="inv-meta-dot"></span>
-                    <span><span class="inv-meta-label">Issued</span> {{ now()->format('M j, Y') }}</span>
+                    <span><span class="inv-meta-label" style="font-size: 11.5px;">Issued</span> {{ now()->format('M j, Y') }}</span>
                 </div>
-                <span class="inv-status inv-status-{{ $statusTone }}">
+                <span class="inv-status inv-status-{{ $statusTone }}" style="font-size: 12px; padding: 6px 14px;">
                     <span class="inv-status-dot"></span>{{ $statusLabel }}
                 </span>
             </div>

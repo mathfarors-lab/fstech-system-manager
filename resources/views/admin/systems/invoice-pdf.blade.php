@@ -46,14 +46,14 @@ $payMoney = function ($amount, $cur) {
     <table class="noborder" style="margin-bottom:2px">
         <tr>
             <td class="noborder" style="width:60%; vertical-align:middle">
-                <x-brand-logo variant="banner" :pdf="true" width="240px" alt="FS Tech Systems" />
+                <x-brand-logo variant="banner" :pdf="true" width="265px" alt="FS Tech Systems" />
             </td>
             <td class="noborder right" style="width:50%">
-                <span class="title">INVOICE</span><br>
-                <span class="muted">No. {{ $invoiceNo }}</span><br>
-                <span class="muted">Date: {{ now()->format('M j, Y') }}</span><br>
+                <span class="title" style="font-size:22px; letter-spacing:4px">INVOICE</span><br>
+                <span class="muted" style="font-size:8.5px">No. {{ $invoiceNo }}</span><br>
+                <span class="muted" style="font-size:8.5px">Date: {{ now()->format('M j, Y') }}</span><br>
                 @if($system->price !== null)
-                    <span class="badge {{ $paid ? 'badge-paid' : 'badge-due' }}">{{ $paid ? 'PAID IN FULL' : 'BALANCE DUE' }}</span>
+                    <span class="badge {{ $paid ? 'badge-paid' : 'badge-due' }}" style="font-size:8.5px">{{ $paid ? 'PAID IN FULL' : 'BALANCE DUE' }}</span>
                 @endif
             </td>
         </tr>
@@ -175,11 +175,11 @@ $payMoney = function ($amount, $cur) {
     <table class="noborder" style="width:100%; margin-top:6px; page-break-inside:avoid">
         <tr>
             <td class="noborder" style="text-align:center; vertical-align:middle">
-                <div class="box" style="display:inline-block; padding:4px 10px; text-align:center">
-                    <div style="background-color:#e11d48; color:#ffffff; font-size:7px; font-weight:bold; letter-spacing:1px; padding:1.5px 5px; border-radius:3px; display:inline-block; margin-bottom:2px">KHQR</div>
-                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:58px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
-                    <strong style="font-size:7.5px; display:block; margin-top:2px; color:#111827">FARORS MATH</strong>
-                    <span class="muted" style="font-size:6.5px; display:block">Scan to Pay</span>
+                <div class="box" style="display:inline-block; padding:5px 14px; text-align:center">
+                    <div style="background-color:#e11d48; color:#ffffff; font-size:8px; font-weight:bold; letter-spacing:1px; padding:2px 6px; border-radius:3px; display:inline-block; margin-bottom:3px">KHQR</div>
+                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:76px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
+                    <strong style="font-size:9px; display:block; margin-top:3px; color:#111827">FARORS MATH</strong>
+                    <span class="muted" style="font-size:7.5px; display:block">Scan to Pay</span>
                 </div>
             </td>
         </tr>
