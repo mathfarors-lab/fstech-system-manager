@@ -112,11 +112,11 @@ $payMoney = function ($amount, $cur) {
         </tbody>
     </table>
 
-    {{-- Settlement Row: Payment Schedule (Left) + KHQR (Center) + Totals (Right) --}}
+    {{-- Settlement Row: Payment Schedule (Left) & Totals (Right) --}}
     <table class="noborder" style="width:100%; margin-top:8px; page-break-inside:avoid">
         <tr>
             @if($milestones->isNotEmpty())
-                <td class="noborder" style="width:48%; vertical-align:top; padding-right:8px">
+                <td class="noborder" style="width:58%; vertical-align:top; padding-right:12px">
                     <div class="box" style="padding:6px 8px">
                         <span class="label" style="display:block; margin-bottom:3px">Payment Schedule</span>
                         <table style="width:100%">
@@ -143,18 +143,11 @@ $payMoney = function ($amount, $cur) {
                         </table>
                     </div>
                 </td>
+            @else
+                <td class="noborder" style="width:55%"></td>
             @endif
 
-            <td class="noborder" style="width:22%; vertical-align:top; padding-right:8px; text-align:center">
-                <div class="box" style="padding:6px; text-align:center">
-                    <div style="background-color:#e11d48; color:#ffffff; font-size:7.5px; font-weight:bold; letter-spacing:1px; padding:2px 4px; border-radius:3px; display:inline-block; margin-bottom:3px">KHQR</div>
-                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:76px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
-                    <strong style="font-size:8px; display:block; margin-top:3px; color:#111827">FARORS MATH</strong>
-                    <span class="muted" style="font-size:7px; display:block">Scan to Pay</span>
-                </div>
-            </td>
-
-            <td class="noborder" style="width:{{ $milestones->isNotEmpty() ? '30%' : '50%' }}; vertical-align:top">
+            <td class="noborder" style="width:{{ $milestones->isNotEmpty() ? '42%' : '45%' }}; vertical-align:top">
                 <table class="noborder totals" style="width:100%">
                     <tr>
                         <td class="muted noborder">Total price</td>
@@ -174,6 +167,20 @@ $payMoney = function ($amount, $cur) {
                     </tr>
                 </table>
                 <div class="muted right" style="font-size:7.5px; margin-top:3px; text-align:center">All totals in {{ $currency }}</div>
+            </td>
+        </tr>
+    </table>
+
+    {{-- Centered KHQR Underneath Payment Stages & Totals --}}
+    <table class="noborder" style="width:100%; margin-top:6px; page-break-inside:avoid">
+        <tr>
+            <td class="noborder" style="text-align:center; vertical-align:middle">
+                <div class="box" style="display:inline-block; padding:4px 10px; text-align:center">
+                    <div style="background-color:#e11d48; color:#ffffff; font-size:7px; font-weight:bold; letter-spacing:1px; padding:1.5px 5px; border-radius:3px; display:inline-block; margin-bottom:2px">KHQR</div>
+                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:58px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
+                    <strong style="font-size:7.5px; display:block; margin-top:2px; color:#111827">FARORS MATH</strong>
+                    <span class="muted" style="font-size:6.5px; display:block">Scan to Pay</span>
+                </div>
             </td>
         </tr>
     </table>
