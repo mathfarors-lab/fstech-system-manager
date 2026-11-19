@@ -45,8 +45,8 @@ $payMoney = function ($amount, $cur) {
     {{-- Header --}}
     <table class="noborder" style="margin-bottom:4px">
         <tr>
-            <td class="noborder" style="width:55%; vertical-align:middle">
-                <x-brand-logo variant="banner" :pdf="true" width="220px" alt="FS Tech Systems" />
+            <td class="noborder" style="width:60%; vertical-align:middle">
+                <x-brand-logo variant="banner" :pdf="true" width="270px" alt="FS Tech Systems" />
             </td>
             <td class="noborder right" style="width:50%">
                 <span class="title">INVOICE</span><br>
