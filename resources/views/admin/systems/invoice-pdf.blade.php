@@ -112,52 +112,71 @@ $payMoney = function ($amount, $cur) {
         </tbody>
     </table>
 
-    {{-- Totals --}}
-    <table class="noborder totals" style="width:48%; margin-left:52%; margin-top:6px">
+    {{-- Settlement Row: Payment Schedule (Left) + KHQR (Center) + Totals (Right) --}}
+    <table class="noborder" style="width:100%; margin-top:8px; page-break-inside:avoid">
         <tr>
-            <td class="muted noborder">Total price</td>
-            <td class="right noborder"><strong>{{ $system->price === null ? '—' : $money($system->price) }}</strong></td>
-        </tr>
-        <tr>
-            <td class="muted noborder">Amount paid</td>
-            <td class="right noborder" style="color:#166534">- {{ $money($system->paid_amount) }}</td>
-        </tr>
-    </table>
-    <table class="noborder" style="width:48%; margin-left:52%; margin-top:3px">
-        <tr>
-            <td class="noborder balance">
-                <span>{{ $paid ? 'Balance' : 'Balance due' }}</span>
-                <span class="right" style="float:right {{ $paid ? '; color:#166534' : '' }}">{{ $paid ? $money(0) : ($system->price === null ? '—' : $money($system->balanceDue())) }}</span>
+            @if($milestones->isNotEmpty())
+                <td class="noborder" style="width:48%; vertical-align:top; padding-right:8px">
+                    <div class="box" style="padding:6px 8px">
+                        <span class="label" style="display:block; margin-bottom:3px">Payment Schedule</span>
+                        <table style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th class="right" style="width:14%">%</th>
+                                <th class="right" style="width:26%">Amount</th>
+                                <th class="right" style="width:20%">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($milestones as $milestone)
+                                <tr>
+                                    <td>{{ $milestone->title }}</td>
+                                    <td class="right muted">{{ rtrim(rtrim(number_format((float) $milestone->percentage, 2), '0'), '.') }}%</td>
+                                    <td class="right"><strong>{{ $milestone->formatAmount() }}</strong></td>
+                                    <td class="right" style="{{ $milestone->isPaid() ? 'color:#166534; font-weight:bold' : 'color:#6b7280' }}">
+                                        {{ $milestone->isPaid() ? 'Paid' : 'Pending' }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            @endif
+
+            <td class="noborder" style="width:22%; vertical-align:top; padding-right:8px; text-align:center">
+                <div class="box" style="padding:6px; text-align:center">
+                    <div style="background-color:#e11d48; color:#ffffff; font-size:7.5px; font-weight:bold; letter-spacing:1px; padding:2px 4px; border-radius:3px; display:inline-block; margin-bottom:3px">KHQR</div>
+                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:76px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
+                    <strong style="font-size:8px; display:block; margin-top:3px; color:#111827">FARORS MATH</strong>
+                    <span class="muted" style="font-size:7px; display:block">Scan to Pay</span>
+                </div>
+            </td>
+
+            <td class="noborder" style="width:{{ $milestones->isNotEmpty() ? '30%' : '50%' }}; vertical-align:top">
+                <table class="noborder totals" style="width:100%">
+                    <tr>
+                        <td class="muted noborder">Total price</td>
+                        <td class="right noborder"><strong>{{ $system->price === null ? '—' : $money($system->price) }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="muted noborder">Amount paid</td>
+                        <td class="right noborder" style="color:#166534">- {{ $money($system->paid_amount) }}</td>
+                    </tr>
+                </table>
+                <table class="noborder" style="width:100%; margin-top:3px">
+                    <tr>
+                        <td class="noborder balance">
+                            <span>{{ $paid ? 'Balance' : 'Balance due' }}</span>
+                            <span class="right" style="float:right {{ $paid ? '; color:#166534' : '' }}">{{ $paid ? $money(0) : ($system->price === null ? '—' : $money($system->balanceDue())) }}</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="muted right" style="font-size:7.5px; margin-top:3px; text-align:center">All totals in {{ $currency }}</div>
             </td>
         </tr>
     </table>
-
-    {{-- Payment schedule --}}
-    @if($milestones->isNotEmpty())
-        <div class="label" style="margin-top:10px">Payment Schedule</div>
-        <table style="margin-top:3px">
-            <thead>
-            <tr>
-                <th>Phase</th>
-                <th class="right" style="width:12%">%</th>
-                <th class="right" style="width:26%">Amount</th>
-                <th class="right" style="width:20%">Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($milestones as $milestone)
-                <tr>
-                    <td>{{ $milestone->title }}</td>
-                    <td class="right muted">{{ rtrim(rtrim(number_format((float) $milestone->percentage, 2), '0'), '.') }}%</td>
-                    <td class="right"><strong>{{ $milestone->formatAmount() }}</strong></td>
-                    <td class="right" style="{{ $milestone->isPaid() ? 'color:#166534; font-weight:bold' : 'color:#6b7280' }}">
-                        {{ $milestone->isPaid() ? 'Paid'.($milestone->paid_at ? ' · '.$milestone->paid_at->format('M j, Y') : '') : 'Pending' }}
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    @endif
 
     {{-- Maintenance --}}
     @if($system->maintenance_amount !== null && $system->maintenance_amount > 0)

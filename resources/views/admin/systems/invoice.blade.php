@@ -296,6 +296,97 @@
         .inv-stage-date { display: block; margin-top: 4px; font-size: 10px; font-weight: 500; color: #94a3b8; }
 
         .inv-summary { display: flex; justify-content: flex-end; margin-top: 18px; }
+        .inv-settlement-row {
+            display: flex;
+            align-items: stretch;
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .inv-stages-card {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 14px 16px;
+            border: 1px solid #e6eaf2;
+            border-radius: 14px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .inv-khqr-card {
+            flex: 0 0 148px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px 12px;
+            border: 1px solid #e6eaf2;
+            border-radius: 14px;
+            background: #ffffff;
+            text-align: center;
+        }
+        .inv-khqr-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .inv-khqr-pill {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 5px;
+            background: #e11d48;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            line-height: 1.2;
+        }
+        .inv-khqr-lbl {
+            font-size: 10px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+        .inv-khqr-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            background: #ffffff;
+        }
+        .inv-khqr-img {
+            max-height: 100px;
+            max-width: 100%;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .inv-khqr-foot {
+            margin-top: 6px;
+            line-height: 1.2;
+        }
+        .inv-khqr-name {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: .02em;
+        }
+        .inv-khqr-note {
+            display: block;
+            font-size: 9px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .inv-totals-card {
+            flex: 0 0 290px;
+            padding: 14px 16px;
+            border: 1px solid #e6eaf2;
+            border-radius: 14px;
+            background: #f8fafc;
+        }
         .inv-summary-card {
             width: 350px;
             max-width: 100%;
@@ -725,6 +816,80 @@
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
+            .inv-settlement-row {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: stretch !important;
+                gap: 8px !important;
+                margin-top: 8px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-stages-card {
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+                padding: 5px 8px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-khqr-card {
+                flex: 0 0 110px !important;
+                padding: 4px 6px !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
+                background: #ffffff !important;
+                text-align: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-khqr-top {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 4px !important;
+                margin-bottom: 2px !important;
+            }
+            .inv-khqr-pill {
+                padding: 1.5px 5px !important;
+                font-size: 7.5px !important;
+                background: #e11d48 !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-khqr-lbl {
+                font-size: 7.5px !important;
+            }
+            .inv-khqr-img {
+                max-height: 70px !important;
+                width: auto !important;
+            }
+            .inv-khqr-foot {
+                margin-top: 2px !important;
+            }
+            .inv-khqr-name {
+                font-size: 9px !important;
+            }
+            .inv-khqr-note {
+                font-size: 7.5px !important;
+                margin-top: 1px !important;
+            }
+            .inv-totals-card {
+                flex: 0 0 230px !important;
+                padding: 6px 10px 6px !important;
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
             .inv-summary-card {
                 width: 280px !important;
                 padding: 6px 10px 6px !important;
@@ -863,6 +1028,10 @@
             .inv-parties > section + section { margin-left: 0; margin-top: 12px; }
             .inv-summary { justify-content: stretch; }
             .inv-summary-card { width: 100%; }
+            .inv-settlement-row { flex-direction: column; gap: 12px; }
+            .inv-stages-card, .inv-khqr-card, .inv-totals-card { width: 100%; flex: 1 1 100%; }
+            .inv-khqr-card { padding: 12px; }
+            .inv-khqr-img { max-height: 110px; }
             .inv-hide-sm { display: none; }
             .inv-footer-inner { flex-direction: column; align-items: flex-start; }
             .inv-footer-ref { margin-top: 8px; }
@@ -1000,8 +1169,63 @@
             </table>
         </section>
 
-        <div class="inv-summary">
-            <div class="inv-summary-card">
+        <div class="inv-settlement-row">
+            @if($milestones->isNotEmpty())
+                <div class="inv-stages-card">
+                    <div class="inv-card-head" style="margin-bottom: 8px;">
+                        <span class="inv-icon"><i class="bi bi-diagram-3"></i></span>
+                        <div>
+                            <span class="inv-card-label" style="display: block;">Payment stages</span>
+                            <span class="inv-section-meta" style="font-size: 11px;">{{ $settledStages }} of {{ $milestones->count() }} settled</span>
+                        </div>
+                    </div>
+                    <table class="inv-table inv-table-stages">
+                        <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th class="inv-right inv-hide-sm">Share</th>
+                            <th class="inv-right">Amount</th>
+                            <th class="inv-right">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($milestones as $milestone)
+                            <tr>
+                                <td><span class="inv-stage-name">{{ $milestone->title }}</span></td>
+                                <td class="inv-right inv-hide-sm inv-muted">{{ rtrim(rtrim(number_format((float) $milestone->percentage, 2), '0'), '.') }}%</td>
+                                <td class="inv-right inv-amount" style="font-size: 12px;">{{ $milestone->formatAmount() }}</td>
+                                <td class="inv-right">
+                                    @if($milestone->isPaid())
+                                        <span class="inv-chip inv-chip-paid"><span class="inv-chip-dot"></span>Paid</span>
+                                        @if($milestone->paid_at)
+                                            <span class="inv-stage-date">{{ $milestone->paid_at->format('M j, Y') }}</span>
+                                        @endif
+                                    @else
+                                        <span class="inv-chip inv-chip-wait"><span class="inv-chip-dot"></span>Pending</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+
+            <div class="inv-khqr-card">
+                <div class="inv-khqr-top">
+                    <span class="inv-khqr-pill">KHQR</span>
+                    <span class="inv-khqr-lbl">Scan to pay</span>
+                </div>
+                <div class="inv-khqr-body">
+                    <img src="{{ asset('images/khqr-payment.jpg') }}" alt="KHQR Payment" class="inv-khqr-img">
+                </div>
+                <div class="inv-khqr-foot">
+                    <strong class="inv-khqr-name">FARORS MATH</strong>
+                    <small class="inv-khqr-note">Bakong · Individual</small>
+                </div>
+            </div>
+
+            <div class="inv-totals-card">
                 <div class="inv-sum-row">
                     <span>Total</span>
                     <strong>{{ $system->formatPrice() }}</strong>
@@ -1018,44 +1242,6 @@
                 <div class="inv-sum-note">All totals in {{ $currency }}</div>
             </div>
         </div>
-
-        @if($milestones->isNotEmpty())
-            <section class="inv-section">
-                <div class="inv-section-head">
-                    <h2>Payment stages</h2>
-                    <span class="inv-section-meta">{{ $settledStages }} of {{ $milestones->count() }} settled</span>
-                </div>
-                <table class="inv-table inv-table-stages">
-                    <thead>
-                    <tr>
-                        <th>Stage</th>
-                        <th class="inv-right inv-hide-sm">Share</th>
-                        <th class="inv-right">Amount</th>
-                        <th class="inv-right">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($milestones as $milestone)
-                        <tr>
-                            <td><span class="inv-stage-name">{{ $milestone->title }}</span></td>
-                            <td class="inv-right inv-hide-sm inv-muted">{{ rtrim(rtrim(number_format((float) $milestone->percentage, 2), '0'), '.') }}%</td>
-                            <td class="inv-right inv-amount">{{ $milestone->formatAmount() }}</td>
-                            <td class="inv-right">
-                                @if($milestone->isPaid())
-                                    <span class="inv-chip inv-chip-paid"><span class="inv-chip-dot"></span>Paid</span>
-                                    @if($milestone->paid_at)
-                                        <span class="inv-stage-date">{{ $milestone->paid_at->format('M j, Y') }}</span>
-                                    @endif
-                                @else
-                                    <span class="inv-chip inv-chip-wait"><span class="inv-chip-dot"></span>Pending</span>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </section>
-        @endif
 
         @if($system->maintenance_amount !== null && $system->maintenance_amount > 0)
             <div class="inv-note inv-note-indigo">
