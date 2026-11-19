@@ -104,10 +104,10 @@
         }
         .inv-heading { text-align: right; }
         .inv-doc {
-            font-size: 27px;
+            font-size: 32px;
             font-weight: 800;
             line-height: 1;
-            letter-spacing: .2em;
+            letter-spacing: .22em;
             text-transform: uppercase;
         }
         .inv-meta {
@@ -115,34 +115,34 @@
             justify-content: flex-end;
             align-items: center;
             margin-top: 11px;
-            font-size: 11.5px;
-            color: rgba(255, 255, 255, .68);
+            font-size: 13px;
+            color: rgba(255, 255, 255, .75);
         }
         .inv-meta-label {
             margin-right: 5px;
-            font-size: 9.5px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: .1em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, .42);
+            color: rgba(255, 255, 255, .55);
         }
         .inv-meta-dot {
-            width: 3px;
-            height: 3px;
+            width: 4px;
+            height: 4px;
             margin: 0 9px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, .3);
+            background: rgba(255, 255, 255, .4);
         }
         .inv-status {
             display: inline-flex;
             align-items: center;
             margin-top: 13px;
-            padding: 5px 11px;
+            padding: 6px 14px;
             border: 1px solid transparent;
             border-radius: 99px;
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
-            letter-spacing: .09em;
+            letter-spacing: .1em;
             text-transform: uppercase;
         }
         .inv-status-dot {
@@ -177,104 +177,104 @@
         .inv-parties > section + section { margin-left: 16px; }
         .inv-card {
             height: 100%;
-            padding: 16px 18px;
+            padding: 18px 20px;
             border: 1px solid #e6eaf2;
             border-radius: 14px;
             background: #ffffff;
         }
-        .inv-card-head { display: flex; align-items: center; margin-bottom: 11px; }
+        .inv-card-head { display: flex; align-items: center; margin-bottom: 12px; }
         .inv-icon {
-            width: 28px;
-            height: 28px;
-            flex: 0 0 28px;
+            width: 32px;
+            height: 32px;
+            flex: 0 0 32px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 9px;
+            margin-right: 10px;
             border-radius: 8px;
             background: #eef2ff;
             color: #4f46e5;
-            font-size: 12px;
+            font-size: 14px;
         }
         .inv-card-label {
-            font-size: 9.5px;
+            font-size: 11.5px;
             font-weight: 700;
-            letter-spacing: .13em;
+            letter-spacing: .14em;
             text-transform: uppercase;
-            color: #64748b;
+            color: #475569;
         }
         .inv-client-name, .inv-project-name {
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 700;
             letter-spacing: -.01em;
             color: #0f172a;
             overflow-wrap: anywhere;
         }
-        .inv-client-empty { font-size: 12.5px; font-weight: 500; color: #94a3b8; }
-        .inv-contact { list-style: none; margin: 9px 0 0; padding: 0; font-size: 12px; color: #475569; }
-        .inv-contact li { display: flex; align-items: flex-start; margin-top: 5px; line-height: 1.5; }
-        .inv-contact li i { width: 16px; flex: 0 0 16px; margin-top: 2px; font-size: 11px; color: #94a3b8; }
+        .inv-client-empty { font-size: 14px; font-weight: 500; color: #64748b; }
+        .inv-contact { list-style: none; margin: 9px 0 0; padding: 0; font-size: 13.5px; color: #334155; }
+        .inv-contact li { display: flex; align-items: flex-start; margin-top: 6px; line-height: 1.5; }
+        .inv-contact li i { width: 18px; flex: 0 0 18px; margin-top: 2px; font-size: 13px; color: #64748b; }
         .inv-contact li span { min-width: 0; overflow-wrap: anywhere; }
-        .inv-tag-row { margin-top: 7px; }
+        .inv-tag-row { margin-top: 8px; }
         .inv-tag {
             display: inline-block;
             margin: 3px 6px 0 0;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border: 1px solid #e2e8f0;
             border-radius: 99px;
             background: #f1f5f9;
-            font-size: 9.5px;
+            font-size: 11px;
             font-weight: 600;
             letter-spacing: .05em;
             text-transform: uppercase;
-            color: #475569;
+            color: #334155;
         }
-        .inv-desc { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: #64748b; }
+        .inv-desc { margin: 12px 0 0; font-size: 13.5px; line-height: 1.6; color: #475569; }
         .inv-terms { margin-top: 12px; padding-top: 11px; border-top: 1px dashed #e2e8f0; }
-        .inv-terms p { margin: 4px 0 0; font-size: 12px; line-height: 1.55; color: #475569; white-space: pre-line; }
+        .inv-terms p { margin: 4px 0 0; font-size: 13px; line-height: 1.55; color: #334155; white-space: pre-line; }
 
-        .inv-section { margin-top: 24px; }
+        .inv-section { margin-top: 28px; }
         .inv-section-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 9px;
+            margin-bottom: 10px;
         }
         .inv-section-head h2 {
             margin: 0;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 700;
             letter-spacing: .14em;
             text-transform: uppercase;
-            color: #64748b;
+            color: #475569;
         }
-        .inv-section-meta { font-size: 11px; font-weight: 500; color: #94a3b8; }
+        .inv-section-meta { font-size: 12.5px; font-weight: 600; color: #64748b; }
 
         .inv-table { width: 100%; border-collapse: collapse; }
         .inv-table th {
-            padding: 0 12px 8px;
-            border-bottom: 1px solid #e6eaf2;
+            padding: 0 12px 10px;
+            border-bottom: 2px solid #e2e8f0;
             text-align: left;
-            font-size: 9.5px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: .1em;
             text-transform: uppercase;
-            color: #94a3b8;
+            color: #64748b;
         }
         .inv-table td {
-            padding: 12px;
+            padding: 14px 12px;
             border-bottom: 1px solid #f1f4f9;
             vertical-align: top;
-            font-size: 12.5px;
-            color: #334155;
+            font-size: 14px;
+            color: #1e293b;
         }
-        .inv-table tbody tr:last-child td { border-bottom: 1px solid #e6eaf2; }
-        .inv-index { width: 38px; font-size: 11px; font-weight: 600; color: #b6c0cf; }
-        .inv-item-title { font-weight: 600; color: #0f172a; }
-        .inv-item-sub { margin-top: 2px; font-size: 11.5px; line-height: 1.5; color: #7c8798; }
-        .inv-amount { font-weight: 600; color: #0f172a; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .inv-table tbody tr:last-child td { border-bottom: 2px solid #e2e8f0; }
+        .inv-index { width: 42px; font-size: 13px; font-weight: 700; color: #94a3b8; }
+        .inv-item-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+        .inv-item-sub { margin-top: 4px; font-size: 13px; line-height: 1.5; color: #64748b; }
+        .inv-amount { font-size: 15px; font-weight: 700; color: #0f172a; font-variant-numeric: tabular-nums; white-space: nowrap; }
         .inv-right { text-align: right; }
-        .inv-muted { color: #8b96a7; }
+        .inv-muted { color: #64748b; }
 
         .inv-table-stages td { padding: 10px 12px; font-size: 12px; }
         .inv-stage-name { font-weight: 600; color: #1e293b; }
@@ -297,9 +297,9 @@
 
         .inv-summary { display: flex; justify-content: flex-end; margin-top: 18px; }
         .inv-summary-card {
-            width: 322px;
+            width: 350px;
             max-width: 100%;
-            padding: 14px 16px 16px;
+            padding: 16px 18px 18px;
             border: 1px solid #e6eaf2;
             border-radius: 14px;
             background: #f8fafc;
@@ -308,29 +308,29 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 5px 0;
-            font-size: 12.5px;
-            color: #64748b;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #475569;
         }
-        .inv-sum-row strong { font-weight: 600; color: #1e293b; font-variant-numeric: tabular-nums; }
+        .inv-sum-row strong { font-size: 15px; font-weight: 700; color: #1e293b; font-variant-numeric: tabular-nums; }
         .inv-sum-row strong.inv-green { color: #059669; }
-        .inv-sum-divider { height: 1px; margin: 8px 0 10px; background: #e6eaf2; }
+        .inv-sum-divider { height: 1px; margin: 10px 0 12px; background: #e2e8f0; }
         .inv-balance {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border: 1px solid transparent;
             border-radius: 10px;
         }
         .inv-balance span {
-            font-size: 9.5px;
+            font-size: 11.5px;
             font-weight: 700;
-            letter-spacing: .11em;
+            letter-spacing: .12em;
             text-transform: uppercase;
         }
         .inv-balance strong {
-            font-size: 19px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -.01em;
             font-variant-numeric: tabular-nums;
@@ -341,43 +341,43 @@
             border-color: rgba(255, 255, 255, .08);
             color: #ffffff;
         }
-        .inv-balance-due span, .inv-balance-partial span { color: rgba(255, 255, 255, .72); }
-        .inv-balance-pending { background: #f1f5f9; border-color: #e2e8f0; color: #475569; }
-        .inv-sum-note { margin-top: 10px; font-size: 9.5px; letter-spacing: .05em; text-align: center; color: #94a3b8; }
+        .inv-balance-due span, .inv-balance-partial span { color: rgba(255, 255, 255, .78); }
+        .inv-balance-pending { background: #f1f5f9; border-color: #e2e8f0; color: #334155; }
+        .inv-sum-note { margin-top: 10px; font-size: 11px; font-weight: 500; letter-spacing: .05em; text-align: center; color: #64748b; }
 
         .inv-note {
             display: flex;
             align-items: flex-start;
             margin-top: 14px;
-            padding: 13px 15px;
+            padding: 14px 16px;
             border: 1px solid #e6eaf2;
             border-radius: 12px;
             background: #f8fafc;
         }
         .inv-note-indigo { background: #f5f3ff; border-color: #e7e2ff; }
         .inv-note-icon {
-            width: 28px;
-            height: 28px;
-            flex: 0 0 28px;
+            width: 32px;
+            height: 32px;
+            flex: 0 0 32px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 11px;
+            margin-right: 12px;
             border: 1px solid #e6eaf2;
             border-radius: 8px;
             background: #ffffff;
             color: #6366f1;
-            font-size: 11px;
+            font-size: 13px;
         }
         .inv-note-title {
-            margin-bottom: 3px;
-            font-size: 9.5px;
+            margin-bottom: 4px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: .13em;
             text-transform: uppercase;
-            color: #64748b;
+            color: #475569;
         }
-        .inv-note-body { font-size: 12px; line-height: 1.6; color: #475569; }
+        .inv-note-body { font-size: 13.5px; line-height: 1.6; color: #334155; }
         .inv-pre { white-space: pre-line; }
 
         .inv-footer { margin-top: auto; padding-top: 26px; }
@@ -385,12 +385,12 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            padding-top: 14px;
-            border-top: 1px solid #e6eaf2;
+            padding-top: 16px;
+            border-top: 2px solid #e2e8f0;
         }
-        .inv-thanks { font-size: 12.5px; font-weight: 600; color: #334155; }
-        .inv-footer-meta { margin-top: 3px; font-size: 10.5px; color: #94a3b8; }
-        .inv-footer-ref { font-size: 9.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; }
+        .inv-thanks { font-size: 15px; font-weight: 700; color: #1e293b; }
+        .inv-footer-meta { margin-top: 5px; font-size: 12px; color: #475569; }
+        .inv-footer-ref { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #475569; }
 
         .inv-actions {
             position: fixed;
