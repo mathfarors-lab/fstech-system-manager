@@ -460,8 +460,8 @@
 
         @media print {
             html, body {
-                width: 210mm !important;
-                height: 297mm !important;
+                width: 100% !important;
+                height: auto !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
@@ -470,27 +470,26 @@
                 color-adjust: exact !important;
             }
             .invoice-sheet {
-                width: 210mm !important;
-                min-height: 297mm !important;
-                height: 297mm !important;
-                max-height: 297mm !important;
-                margin: 0 !important;
+                width: 100% !important;
+                max-width: 210mm !important;
+                min-height: auto !important;
+                height: auto !important;
+                margin: 0 auto !important;
                 border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
-                display: flex !important;
-                flex-direction: column !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
+                display: block !important;
             }
             .inv-hero {
-                padding: 26px 32px 30px !important;
+                padding: 30px 32px 34px !important;
+                background: #0b0f24 !important;
                 background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
             .inv-hero-accent {
+                background: #6366f1 !important;
                 background: linear-gradient(90deg, #6366f1, #8b5cf6 55%, #a855f7) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -499,7 +498,7 @@
                 display: flex !important;
                 flex-direction: row !important;
                 justify-content: space-between !important;
-                align-items: flex-start !important;
+                align-items: center !important;
             }
             .inv-brand {
                 display: flex !important;
@@ -509,17 +508,36 @@
                 text-align: right !important;
                 margin-top: 0 !important;
             }
+            .inv-doc {
+                font-size: 32px !important;
+                color: #ffffff !important;
+            }
             .inv-meta {
                 display: flex !important;
                 justify-content: flex-end !important;
+                color: rgba(255, 255, 255, .8) !important;
             }
-            .inv-doc {
-                font-size: 28px !important;
+            .inv-status {
+                border: 1px solid rgba(255, 255, 255, .25) !important;
+            }
+            .inv-status-pending {
+                background: #1e293b !important;
+                color: #f1f5f9 !important;
+            }
+            .inv-status-paid {
+                background: #064e3b !important;
+                color: #a7f3d0 !important;
+            }
+            .inv-status-due {
+                background: #7f1d1d !important;
+                color: #fecaca !important;
             }
             .inv-parties {
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: stretch !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
             }
             .inv-parties > section {
                 flex: 1 1 0 !important;
@@ -530,32 +548,9 @@
                 margin-left: 16px !important;
                 margin-top: 0 !important;
             }
-            .inv-summary {
-                display: flex !important;
-                justify-content: flex-end !important;
-            }
-            .inv-summary-card {
-                width: 330px !important;
-                background: #f8fafc !important;
-                border: 1px solid #e2e8f0 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .inv-hide-sm {
-                display: table-cell !important;
-            }
-            .inv-footer-inner {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: flex-end !important;
-            }
-            .inv-footer-ref {
-                margin-top: 0 !important;
-            }
             .inv-card {
                 background: #ffffff !important;
-                border: 1px solid #e6eaf2 !important;
+                border: 1px solid #cbd5e1 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -565,40 +560,80 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .inv-balance {
-                background: #f1f5f9 !important;
+            .inv-summary {
+                display: flex !important;
+                justify-content: flex-end !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-summary-card {
+                width: 350px !important;
+                background: #f8fafc !important;
                 border: 1px solid #cbd5e1 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .inv-status-pending {
-                background: rgba(148, 163, 184, .25) !important;
-                border-color: rgba(203, 213, 225, .45) !important;
-                color: #cbd5e1 !important;
+            .inv-balance {
+                background: #0f172a !important;
+                color: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .inv-status-paid {
-                background: rgba(16, 185, 129, .25) !important;
-                border-color: rgba(52, 211, 153, .45) !important;
-                color: #6ee7b7 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .inv-balance span {
+                color: rgba(255, 255, 255, .85) !important;
             }
-            .inv-status-due {
-                background: rgba(248, 113, 113, .25) !important;
-                border-color: rgba(252, 165, 165, .45) !important;
-                color: #fca5a5 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .inv-balance strong {
+                color: #ffffff !important;
+            }
+            .inv-balance-paid {
+                background: #ecfdf5 !important;
+                color: #047857 !important;
+            }
+            .inv-balance-paid span, .inv-balance-paid strong {
+                color: #047857 !important;
+            }
+            .inv-balance-pending {
+                background: #1e293b !important;
+                color: #ffffff !important;
+            }
+            .inv-balance-pending span, .inv-balance-pending strong {
+                color: #ffffff !important;
+            }
+            .inv-section {
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+            }
+            .inv-section-head {
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+            .inv-table tr {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-note {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
             }
             .inv-body {
                 padding: 24px 32px 20px !important;
-                flex: 1 1 auto !important;
             }
             .inv-footer {
-                margin-top: auto !important;
-                padding-top: 18px !important;
+                margin-top: 30px !important;
+                padding-top: 16px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-footer-inner {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+            }
+            .inv-footer-ref {
+                margin-top: 0 !important;
             }
             .no-print {
                 display: none !important;
