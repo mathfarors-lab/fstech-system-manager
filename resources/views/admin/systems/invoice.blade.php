@@ -495,6 +495,64 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+            .inv-hero-inner {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+            }
+            .inv-brand {
+                display: flex !important;
+                align-items: center !important;
+            }
+            .inv-heading {
+                text-align: right !important;
+                margin-top: 0 !important;
+            }
+            .inv-meta {
+                display: flex !important;
+                justify-content: flex-end !important;
+            }
+            .inv-doc {
+                font-size: 28px !important;
+            }
+            .inv-parties {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: stretch !important;
+            }
+            .inv-parties > section {
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+                margin-top: 0 !important;
+            }
+            .inv-parties > section + section {
+                margin-left: 16px !important;
+                margin-top: 0 !important;
+            }
+            .inv-summary {
+                display: flex !important;
+                justify-content: flex-end !important;
+            }
+            .inv-summary-card {
+                width: 330px !important;
+                background: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .inv-hide-sm {
+                display: table-cell !important;
+            }
+            .inv-footer-inner {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+            }
+            .inv-footer-ref {
+                margin-top: 0 !important;
+            }
             .inv-card {
                 background: #ffffff !important;
                 border: 1px solid #e6eaf2 !important;
@@ -504,12 +562,6 @@
             .inv-icon {
                 background: #eef2ff !important;
                 color: #4f46e5 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .inv-summary-card {
-                background: #f8fafc !important;
-                border: 1px solid #e2e8f0 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
