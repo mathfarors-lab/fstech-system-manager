@@ -20,33 +20,33 @@ $payMoney = function ($amount, $cur) {
 <head>
     <meta charset="utf-8">
     <style>
-        @page { margin: 46px 48px; }
-        body { font-family: DejaVu Sans, sans-serif; font-size: 11px; color: #1f2937; }
+        @page { margin: 24px 32px; }
+        body { font-family: DejaVu Sans, sans-serif; font-size: 10px; color: #1f2937; line-height: 1.3; }
         .accent { color: #4f46e5; }
         .muted { color: #6b7280; }
-        .label { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: #6b7280; font-weight: bold; }
-        .title { font-size: 24px; font-weight: bold; letter-spacing: 6px; }
-        .badge { font-size: 9px; font-weight: bold; padding: 3px 10px; border-radius: 10px; }
+        .label { font-size: 7.5px; letter-spacing: 1px; text-transform: uppercase; color: #6b7280; font-weight: bold; }
+        .title { font-size: 20px; font-weight: bold; letter-spacing: 4px; }
+        .badge { font-size: 8px; font-weight: bold; padding: 2px 8px; border-radius: 8px; }
         .badge-paid { background-color: #dcfce7; color: #166534; }
         .badge-due { background-color: #fef9c3; color: #854d0e; }
-        .bar { height: 4px; background-color: #4f46e5; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; border-bottom: 2px solid #1f2937; padding: 6px 5px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280; }
-        td { padding: 7px 5px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+        .bar { height: 3px; background-color: #4f46e5; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; page-break-inside: avoid; }
+        th { text-align: left; border-bottom: 2px solid #1f2937; padding: 4px 4px; font-size: 8px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280; }
+        td { padding: 4px 4px; border-bottom: 1px solid #e5e7eb; vertical-align: top; font-size: 9.5px; }
         .noborder td, .noborder th { border-bottom: none; }
         .right { text-align: right; }
-        .box { border: 1px solid #e5e7eb; padding: 10px 12px; }
-        .totals td { border-bottom: none; padding: 3px 5px; }
-        .balance { background-color: #f3f4f6; border: 1px solid #e5e7eb; padding: 10px 12px; font-size: 17px; font-weight: bold; }
-        .note { background-color: #f8f9fb; border: 1px solid #e5e7eb; padding: 9px 12px; margin-top: 12px; }
+        .box { border: 1px solid #e5e7eb; padding: 6px 8px; }
+        .totals td { border-bottom: none; padding: 2px 4px; font-size: 9.5px; }
+        .balance { background-color: #f3f4f6; border: 1px solid #e5e7eb; padding: 6px 8px; font-size: 14px; font-weight: bold; }
+        .note { background-color: #f8f9fb; border: 1px solid #e5e7eb; padding: 5px 8px; margin-top: 6px; font-size: 8.5px; page-break-inside: avoid; }
     </style>
 </head>
 <body>
     {{-- Header --}}
-    <table class="noborder" style="margin-bottom:4px">
+    <table class="noborder" style="margin-bottom:2px">
         <tr>
             <td class="noborder" style="width:60%; vertical-align:middle">
-                <x-brand-logo variant="banner" :pdf="true" width="270px" alt="FS Tech Systems" />
+                <x-brand-logo variant="banner" :pdf="true" width="240px" alt="FS Tech Systems" />
             </td>
             <td class="noborder right" style="width:50%">
                 <span class="title">INVOICE</span><br>
@@ -61,9 +61,9 @@ $payMoney = function ($amount, $cur) {
     <div class="bar"></div>
 
     {{-- Billed to / Project --}}
-    <table class="noborder" style="margin-bottom:20px">
+    <table class="noborder" style="margin-bottom:10px">
         <tr>
-            <td class="noborder" style="width:50%; border:1px solid #e5e7eb; padding:10px 12px">
+            <td class="noborder" style="width:50%; border:1px solid #e5e7eb; padding:8px 10px">
                 <span class="label">Billed To</span><br>
                 <strong>{{ $system->client_name ?: '—' }}</strong><br>
                 @if($system->client_phone)Phone: {{ $system->client_phone }}<br>@endif
@@ -72,7 +72,7 @@ $payMoney = function ($amount, $cur) {
                 @if($system->client_address)Address: {{ $system->client_address }}<br>@endif
             </td>
             <td class="noborder" style="width:6px; border:none"></td>
-            <td class="noborder" style="width:50%; border:1px solid #e5e7eb; padding:10px 12px">
+            <td class="noborder" style="width:50%; border:1px solid #e5e7eb; padding:8px 10px">
                 <span class="label">Project</span><br>
                 <strong>{{ $system->name }}</strong><br>
                 @if($system->description)<span class="muted">{{ \Illuminate\Support\Str::limit($system->description, 150) }}</span><br>@endif
@@ -113,7 +113,7 @@ $payMoney = function ($amount, $cur) {
     </table>
 
     {{-- Totals --}}
-    <table class="noborder totals" style="width:50%; margin-left:50%; margin-top:10px">
+    <table class="noborder totals" style="width:48%; margin-left:52%; margin-top:6px">
         <tr>
             <td class="muted noborder">Total price</td>
             <td class="right noborder"><strong>{{ $system->price === null ? '—' : $money($system->price) }}</strong></td>
@@ -123,7 +123,7 @@ $payMoney = function ($amount, $cur) {
             <td class="right noborder" style="color:#166534">- {{ $money($system->paid_amount) }}</td>
         </tr>
     </table>
-    <table class="noborder" style="width:50%; margin-left:50%; margin-top:4px">
+    <table class="noborder" style="width:48%; margin-left:52%; margin-top:3px">
         <tr>
             <td class="noborder balance">
                 <span>{{ $paid ? 'Balance' : 'Balance due' }}</span>
@@ -134,8 +134,8 @@ $payMoney = function ($amount, $cur) {
 
     {{-- Payment schedule --}}
     @if($milestones->isNotEmpty())
-        <div class="label" style="margin-top:18px">Payment Schedule</div>
-        <table style="margin-top:6px">
+        <div class="label" style="margin-top:10px">Payment Schedule</div>
+        <table style="margin-top:3px">
             <thead>
             <tr>
                 <th>Phase</th>
@@ -180,7 +180,7 @@ $payMoney = function ($amount, $cur) {
     @endif
 
     {{-- Provider & Brand Contact Info --}}
-    <table class="noborder" style="margin-top:24px; padding-top:12px; border-top:1px solid #e5e7eb; width:100%">
+    <table class="noborder" style="margin-top:14px; padding-top:8px; border-top:1px solid #e5e7eb; width:100%; page-break-inside:avoid">
         <tr>
             <td class="noborder" style="width:60%">
                 <strong style="color:#4f46e5; font-size:11px">FS Tech Systems</strong><br>

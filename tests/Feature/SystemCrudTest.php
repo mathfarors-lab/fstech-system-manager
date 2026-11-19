@@ -7,6 +7,7 @@ use App\Models\System;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Version;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Database\Seeders\AdminUserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -184,6 +185,68 @@ class SystemCrudTest extends TestCase
             ->assertSee('Start to build');
 
         $this->get(route('systems.invoice.pdf', $system))->assertOk();
+    }
+
+    public function test_invoice_pdf_fits_on_one_page(): void
+    {
+        $system = System::create([
+            'name' => 'ChiliPosApp',
+            'slug' => 'chiliposapp',
+            'stack' => 'dotnet',
+            'environment' => 'production',
+            'status' => 'active',
+            'client_name' => 'Demo Client',
+            'client_phone' => '+855 12 345 678',
+            'client_email' => 'client@test.com',
+            'client_telegram' => '@client',
+            'client_address' => 'Phnom Penh',
+            'price' => 700,
+            'price_currency' => 'USD',
+            'paid_amount' => 0,
+            'maintenance_amount' => 50,
+            'maintenance_cycle' => 'monthly',
+            'notes' => 'Some invoice notes here.',
+        ]);
+
+        foreach ([
+            ['category' => 'setup_fee', 'title' => 'Setup / Installation', 'amount' => 200],
+            ['category' => 'developer_fee', 'title' => 'Developer / Dev Fee', 'amount' => 350],
+            ['category' => 'domain', 'title' => 'Domain', 'amount' => 30],
+            ['category' => 'hosting', 'title' => 'Hosting / Server', 'amount' => 120],
+        ] as $exp) {
+            $system->financeTransactions()->create([
+                'type' => 'expense',
+                'category' => $exp['category'],
+                'title' => $exp['title'],
+                'amount' => $exp['amount'],
+                'currency' => 'USD',
+                'transaction_date' => now()->toDateString(),
+            ]);
+        }
+
+        foreach ([
+            ['title' => 'Start to build', 'percentage' => 40, 'amount' => 280],
+            ['title' => 'Testing', 'percentage' => 20, 'amount' => 140],
+            ['title' => 'Complete', 'percentage' => 40, 'amount' => 280],
+        ] as $idx => $ms) {
+            $system->paymentMilestones()->create([
+                'title' => $ms['title'],
+                'percentage' => $ms['percentage'],
+                'amount' => $ms['amount'],
+                'currency' => 'USD',
+                'status' => 'pending',
+                'sort_order' => $idx,
+            ]);
+        }
+
+        $pdf = Pdf::loadView('admin.systems.invoice-pdf', [
+            'system' => $system,
+            'costs' => $system->financeTransactions()->where('type', 'expense')->get(),
+            'milestones' => $system->paymentMilestones()->get(),
+        ])->setPaper('a4', 'portrait');
+
+        $pdf->render();
+        $this->assertEquals(1, $pdf->getDomPDF()->getCanvas()->get_page_count());
     }
 
     public function test_payment_phases_must_total_100_percent(): void

@@ -459,36 +459,56 @@
         }
 
         @media print {
+            *, *:before, *:after {
+                box-sizing: border-box !important;
+            }
             html, body {
-                width: 100% !important;
-                height: auto !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
+                overflow: hidden !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                break-after: avoid !important;
+                break-inside: avoid !important;
             }
             .invoice-sheet {
-                width: 100% !important;
+                width: 210mm !important;
                 max-width: 210mm !important;
-                min-height: auto !important;
-                height: auto !important;
-                margin: 0 auto !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
                 border: none !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
-                display: block !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                overflow: hidden !important;
+                page-break-inside: avoid !important;
+                page-break-after: avoid !important;
+                break-inside: avoid !important;
+                break-after: avoid !important;
             }
             .inv-hero {
-                padding: 30px 32px 34px !important;
+                padding: 16px 24px 18px !important;
                 background: #0b0f24 !important;
                 background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
+                flex-shrink: 0 !important;
             }
             .inv-hero-accent {
+                height: 3px !important;
                 background: #6366f1 !important;
                 background: linear-gradient(90deg, #6366f1, #8b5cf6 55%, #a855f7) !important;
                 -webkit-print-color-adjust: exact !important;
@@ -504,20 +524,48 @@
                 display: flex !important;
                 align-items: center !important;
             }
+            .inv-brand img, .inv-brand .fst-brand-icon {
+                height: 48px !important;
+                width: auto !important;
+                max-height: 48px !important;
+            }
+            .inv-brand-text {
+                margin-left: 12px !important;
+            }
+            .inv-brand strong {
+                font-size: 19px !important;
+                line-height: 1.1 !important;
+            }
+            .inv-brand small {
+                font-size: 7.5px !important;
+                margin-top: 2px !important;
+            }
             .inv-heading {
                 text-align: right !important;
                 margin-top: 0 !important;
             }
             .inv-doc {
-                font-size: 32px !important;
+                font-size: 20px !important;
+                letter-spacing: .16em !important;
                 color: #ffffff !important;
             }
             .inv-meta {
                 display: flex !important;
                 justify-content: flex-end !important;
+                margin-top: 4px !important;
+                font-size: 10.5px !important;
                 color: rgba(255, 255, 255, .8) !important;
             }
+            .inv-meta-label {
+                font-size: 9px !important;
+            }
+            .inv-meta-dot {
+                margin: 0 6px !important;
+            }
             .inv-status {
+                margin-top: 5px !important;
+                padding: 3px 9px !important;
+                font-size: 9px !important;
                 border: 1px solid rgba(255, 255, 255, .25) !important;
             }
             .inv-status-pending {
@@ -532,10 +580,19 @@
                 background: #7f1d1d !important;
                 color: #fecaca !important;
             }
+            .inv-body {
+                padding: 14px 24px 14px !important;
+                flex: 1 1 auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                overflow: hidden !important;
+            }
             .inv-parties {
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: stretch !important;
+                gap: 12px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -545,44 +602,163 @@
                 margin-top: 0 !important;
             }
             .inv-parties > section + section {
-                margin-left: 16px !important;
-                margin-top: 0 !important;
+                margin-left: 0 !important;
             }
             .inv-card {
+                padding: 8px 12px !important;
                 background: #ffffff !important;
                 border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+            .inv-card-head {
+                margin-bottom: 4px !important;
+            }
             .inv-icon {
+                width: 20px !important;
+                height: 20px !important;
+                font-size: 10px !important;
+                margin-right: 6px !important;
+                border-radius: 5px !important;
                 background: #eef2ff !important;
                 color: #4f46e5 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+            .inv-card-label {
+                font-size: 9px !important;
+                letter-spacing: .08em !important;
+            }
+            .inv-client-name, .inv-project-name {
+                font-size: 13px !important;
+                line-height: 1.2 !important;
+            }
+            .inv-client-empty {
+                font-size: 11px !important;
+            }
+            .inv-contact {
+                margin-top: 4px !important;
+                font-size: 10px !important;
+                line-height: 1.35 !important;
+                gap: 2px !important;
+            }
+            .inv-contact li {
+                margin-top: 2px !important;
+                gap: 4px !important;
+            }
+            .inv-contact li i {
+                width: 14px !important;
+                flex: 0 0 14px !important;
+                font-size: 10px !important;
+            }
+            .inv-tag-row {
+                margin-top: 3px !important;
+            }
+            .inv-tag {
+                padding: 2px 6px !important;
+                font-size: 8.5px !important;
+            }
+            .inv-desc {
+                margin: 3px 0 0 !important;
+                font-size: 10px !important;
+                line-height: 1.35 !important;
+            }
+            .inv-terms {
+                margin-top: 3px !important;
+                padding-top: 3px !important;
+            }
+            .inv-terms p {
+                font-size: 9.5px !important;
+                margin: 2px 0 0 !important;
+            }
+            .inv-section {
+                margin-top: 8px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-section-head {
+                margin-bottom: 3px !important;
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+            .inv-section-head h2 {
+                font-size: 9.5px !important;
+            }
+            .inv-section-meta {
+                font-size: 9.5px !important;
+            }
+            .inv-table {
+                width: 100% !important;
+            }
+            .inv-table th {
+                padding: 3px 6px 4px !important;
+                font-size: 8.5px !important;
+            }
+            .inv-table td {
+                padding: 4px 6px !important;
+                font-size: 10.5px !important;
+            }
+            .inv-table tr {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .inv-index {
+                width: 28px !important;
+                font-size: 10px !important;
+            }
+            .inv-item-title {
+                font-size: 11px !important;
+            }
+            .inv-item-sub {
+                margin-top: 1px !important;
+                font-size: 9px !important;
+                line-height: 1.2 !important;
+            }
+            .inv-amount {
+                font-size: 11.5px !important;
+            }
             .inv-summary {
                 display: flex !important;
                 justify-content: flex-end !important;
+                margin-top: 6px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-summary-card {
-                width: 350px !important;
+                width: 280px !important;
+                padding: 6px 10px 6px !important;
                 background: #f8fafc !important;
                 border: 1px solid #cbd5e1 !important;
+                border-radius: 8px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+            .inv-sum-row {
+                padding: 1.5px 0 !important;
+                font-size: 10.5px !important;
+            }
+            .inv-sum-row strong {
+                font-size: 11.5px !important;
+            }
+            .inv-sum-divider {
+                height: 1px !important;
+                margin: 4px 0 !important;
+            }
             .inv-balance {
+                padding: 5px 8px !important;
+                border-radius: 6px !important;
                 background: #0f172a !important;
                 color: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-balance span {
+                font-size: 9px !important;
                 color: rgba(255, 255, 255, .85) !important;
             }
             .inv-balance strong {
+                font-size: 14px !important;
                 color: #ffffff !important;
             }
             .inv-balance-paid {
@@ -599,30 +775,52 @@
             .inv-balance-pending span, .inv-balance-pending strong {
                 color: #ffffff !important;
             }
-            .inv-section {
-                break-inside: auto !important;
-                page-break-inside: auto !important;
+            .inv-sum-note {
+                margin-top: 3px !important;
+                font-size: 8px !important;
             }
-            .inv-section-head {
-                break-after: avoid !important;
-                page-break-after: avoid !important;
+            .inv-table-stages td {
+                padding: 3px 6px !important;
+                font-size: 9.5px !important;
             }
-            .inv-table tr {
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
+            .inv-stage-name {
+                font-size: 10px !important;
+            }
+            .inv-chip {
+                padding: 1.5px 5px !important;
+                font-size: 7.5px !important;
+            }
+            .inv-stage-date {
+                font-size: 7.5px !important;
+                margin-top: 1px !important;
             }
             .inv-note {
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
+                margin-top: 6px !important;
+                padding: 5px 8px !important;
                 background: #f8fafc !important;
                 border: 1px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
             }
-            .inv-body {
-                padding: 24px 32px 20px !important;
+            .inv-note-icon {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 9px !important;
+                margin-right: 6px !important;
+                border-radius: 4px !important;
+            }
+            .inv-note-title {
+                font-size: 8px !important;
+                margin-bottom: 1px !important;
+            }
+            .inv-note-body {
+                font-size: 9.5px !important;
+                line-height: 1.25 !important;
             }
             .inv-footer {
-                margin-top: 30px !important;
-                padding-top: 16px !important;
+                margin-top: auto !important;
+                padding-top: 6px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -631,9 +829,20 @@
                 flex-direction: row !important;
                 justify-content: space-between !important;
                 align-items: flex-end !important;
+                padding-top: 6px !important;
+                border-top: 1px solid #cbd5e1 !important;
+            }
+            .inv-thanks {
+                font-size: 11px !important;
+            }
+            .inv-footer-meta {
+                margin-top: 2px !important;
+                font-size: 8.5px !important;
+                line-height: 1.35 !important;
             }
             .inv-footer-ref {
                 margin-top: 0 !important;
+                font-size: 8.5px !important;
             }
             .no-print {
                 display: none !important;
@@ -902,6 +1111,7 @@
 
 <div class="inv-actions no-print" role="toolbar" aria-label="Invoice actions">
     <a href="{{ route('systems.show', [$system, 'tab' => 'finance']) }}" class="inv-btn"><i class="bi bi-arrow-left"></i>Back</a>
+    <a href="{{ route('systems.invoice.pdf', $system) }}" class="inv-btn"><i class="bi bi-file-earmark-pdf"></i>Download PDF</a>
     <button type="button" class="inv-btn" id="saveImageBtn" onclick="fstSaveInvoiceImage(this)"><i class="bi bi-image"></i>Save image</button>
     <button type="button" class="inv-btn inv-btn-primary" onclick="window.print()"><i class="bi bi-printer"></i>Print / Save as PDF</button>
 </div>
