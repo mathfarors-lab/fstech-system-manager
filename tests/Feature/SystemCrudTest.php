@@ -266,6 +266,61 @@ class SystemCrudTest extends TestCase
         ]);
     }
 
+    public function test_system_can_be_updated_with_project_costs_and_milestones(): void
+    {
+        $system = System::create([
+            'name' => 'ChiliPosApp',
+            'slug' => 'chiliposapp',
+            'stack' => 'dotnet',
+            'environment' => 'production',
+            'status' => 'active',
+        ]);
+
+        $this->get(route('systems.edit', $system))
+            ->assertOk()
+            ->assertSee('Project Costs')
+            ->assertSee('Payment Stage Plan');
+
+        $response = $this->put(route('systems.update', $system), [
+            'name' => 'ChiliPosApp',
+            'stack' => 'dotnet',
+            'environment' => 'production',
+            'status' => 'active',
+            'expense_currency' => 'USD',
+            'expenses' => [
+                ['category' => 'setup_fee', 'title' => 'Setup / Installation', 'amount' => 200],
+                ['category' => 'developer_fee', 'title' => 'Developer / Dev Fee', 'amount' => 350],
+                ['category' => 'domain', 'title' => 'Domain', 'amount' => 30],
+                ['category' => 'hosting', 'title' => 'Hosting / Server', 'amount' => 120],
+            ],
+            'milestones' => [
+                ['title' => 'Start to build', 'percentage' => 40],
+                ['title' => 'Testing', 'percentage' => 20],
+                ['title' => 'Complete', 'percentage' => 40],
+            ],
+        ]);
+
+        $response->assertRedirect(route('systems.show', $system));
+
+        $system->refresh();
+        $this->assertEquals(700, (float) $system->price);
+        $this->assertEquals('USD', $system->price_currency);
+        $this->assertEquals(4, $system->financeTransactions()->where('type', 'expense')->count());
+        $this->assertEquals(3, $system->paymentMilestones()->count());
+
+        $this->assertDatabaseHas('payment_milestones', [
+            'system_id' => $system->id,
+            'title' => 'Start to build',
+            'percentage' => 40,
+            'amount' => 280,
+        ]);
+
+        $this->get(route('systems.edit', $system))
+            ->assertOk()
+            ->assertSee('Setup / Installation')
+            ->assertSee('Developer / Dev Fee');
+    }
+
     public function test_system_archive_and_restore(): void
     {
         $system = System::create([

@@ -187,27 +187,109 @@ class SystemController extends Controller
     public function edit(System $system)
     {
         $users = User::orderBy('name')->get();
+        $expenses = $system->financeTransactions()->where('type', 'expense')->orderBy('id')->get();
+        $milestones = $system->paymentMilestones()->orderBy('sort_order')->orderBy('id')->get();
 
-        return view('admin.systems.edit', ['system' => $system, 'users' => $users]);
+        return view('admin.systems.edit', compact('system', 'users', 'expenses', 'milestones'));
     }
 
     public function update(System $system, Request $request)
     {
         $data = $this->validated($request);
+
+        $hasExpenses = $request->has('expenses') || $request->has('expense_currency');
+        $rows = [];
+        $currency = $system->price_currency ?? 'USD';
+        $milestones = collect();
+        $total = $system->price ?? 0;
+
+        if ($hasExpenses) {
+            $expenses = $request->validate([
+                'expense_currency' => ['required', 'in:USD,KHR'],
+                'expenses' => ['required', 'array', 'min:1'],
+                'expenses.*.category' => ['required', 'in:'.implode(',', FinanceTransaction::EXPENSE_CATEGORIES)],
+                'expenses.*.title' => ['nullable', 'string', 'max:255'],
+                'expenses.*.amount' => ['required', 'numeric', 'min:0.01'],
+            ]);
+
+            $currency = $expenses['expense_currency'];
+            $rows = $expenses['expenses'];
+            $total = array_sum(array_map(fn ($row) => (float) $row['amount'], $rows));
+
+            $milestoneData = $request->validate([
+                'milestones' => ['nullable', 'array'],
+                'milestones.*.title' => ['nullable', 'string', 'max:100'],
+                'milestones.*.percentage' => ['nullable', 'numeric', 'min:0', 'max:100'],
+            ])['milestones'] ?? [];
+
+            $milestones = collect($milestoneData)
+                ->filter(fn ($row) => trim((string) ($row['title'] ?? '')) !== '' && is_numeric($row['percentage'] ?? null) && (float) $row['percentage'] > 0)
+                ->map(fn ($row) => ['title' => trim($row['title']), 'percentage' => (float) $row['percentage']])
+                ->values();
+
+            if ($milestones->isNotEmpty() && abs($milestones->sum('percentage') - 100) > 0.01) {
+                throw ValidationException::withMessages([
+                    'milestones' => 'Payment phases must add up to exactly 100% (currently '.rtrim(rtrim(number_format($milestones->sum('percentage'), 2, '.', ''), '0'), '.').'%).',
+                ]);
+            }
+
+            $data['price'] = $total;
+            $data['price_currency'] = $currency;
+        }
+
         if (strtolower($data['name']) !== strtolower($system->name)) {
             $data['slug'] = $this->uniqueSlug($data['name'], $system->id);
         }
 
-        $system->update($data);
+        DB::transaction(function () use ($system, $data, $hasExpenses, $rows, $currency, $milestones, $total, $request) {
+            $system->update($data);
 
-        if ($system->price !== null && $system->paymentMilestones()->where('status', 'pending')->exists()) {
-            $system->paymentMilestones()->where('status', 'pending')->get()->each(function (PaymentMilestone $milestone) use ($system) {
-                $milestone->update([
-                    'amount' => round((float) $system->price * (float) $milestone->percentage / 100, 2),
-                    'currency' => $system->price_currency ?? $milestone->currency,
-                ]);
-            });
-        }
+            if ($hasExpenses) {
+                $system->financeTransactions()->where('type', 'expense')->delete();
+
+                foreach ($rows as $row) {
+                    $category = $row['category'];
+
+                    $system->financeTransactions()->create([
+                        'type' => 'expense',
+                        'category' => $category,
+                        'title' => ($row['title'] ?? null) ?: (FinanceTransaction::CATEGORIES[$category] ?? 'Expense'),
+                        'amount' => $row['amount'],
+                        'currency' => $currency,
+                        'transaction_date' => now()->toDateString(),
+                        'created_by_id' => $request->user()->id,
+                    ]);
+                }
+
+                if ($system->paymentMilestones()->where('status', 'paid')->doesntExist()) {
+                    $system->paymentMilestones()->delete();
+                    foreach ($milestones as $index => $milestone) {
+                        $system->paymentMilestones()->create([
+                            'title' => $milestone['title'],
+                            'percentage' => $milestone['percentage'],
+                            'amount' => round($total * $milestone['percentage'] / 100, 2),
+                            'currency' => $currency,
+                            'status' => 'pending',
+                            'sort_order' => $index,
+                        ]);
+                    }
+                } else {
+                    $system->paymentMilestones()->where('status', 'pending')->get()->each(function (PaymentMilestone $milestone) use ($total, $currency) {
+                        $milestone->update([
+                            'amount' => round($total * (float) $milestone->percentage / 100, 2),
+                            'currency' => $currency,
+                        ]);
+                    });
+                }
+            } elseif ($system->price !== null && $system->paymentMilestones()->where('status', 'pending')->exists()) {
+                $system->paymentMilestones()->where('status', 'pending')->get()->each(function (PaymentMilestone $milestone) use ($system) {
+                    $milestone->update([
+                        'amount' => round((float) $system->price * (float) $milestone->percentage / 100, 2),
+                        'currency' => $system->price_currency ?? $milestone->currency,
+                    ]);
+                });
+            }
+        });
 
         return redirect()
             ->route('systems.show', $system)

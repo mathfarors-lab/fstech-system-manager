@@ -91,26 +91,26 @@
                value="{{ old('client_address', $system->client_address ?? '') }}">
     </div>
 
-    @unless(isset($system))
-        <div class="col-12">
-            <div class="border rounded p-3">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-                    <h6 class="fw-bold text-body-secondary text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.06em">
-                        <i class="bi bi-wallet2 me-1"></i>Project Costs <span class="text-danger">*</span>
-                    </h6>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="form-label small fw-semibold mb-0" for="expenseCurrency">Currency</label>
-                        <select name="expense_currency" id="expenseCurrency" class="form-select form-select-sm" style="width:auto">
-                            <option value="USD" {{ old('expense_currency', 'USD') === 'USD' ? 'selected' : '' }}>USD</option>
-                            <option value="KHR" {{ old('expense_currency') === 'KHR' ? 'selected' : '' }}>KHR</option>
-                        </select>
-                    </div>
+    <div class="col-12">
+        <div class="border rounded p-3">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                <h6 class="fw-bold text-body-secondary text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.06em">
+                    <i class="bi bi-wallet2 me-1"></i>Project Costs <span class="text-danger">*</span>
+                </h6>
+                <div class="d-flex align-items-center gap-2">
+                    <label class="form-label small fw-semibold mb-0" for="expenseCurrency">Currency</label>
+                    <select name="expense_currency" id="expenseCurrency" class="form-select form-select-sm" style="width:auto">
+                        <option value="USD" {{ old('expense_currency', $system->price_currency ?? 'USD') === 'USD' ? 'selected' : '' }}>USD</option>
+                        <option value="KHR" {{ old('expense_currency', $system->price_currency ?? 'USD') === 'KHR' ? 'selected' : '' }}>KHR</option>
+                    </select>
                 </div>
-                <div id="expenseRows"></div>
-                <button type="button" class="btn btn-light border btn-sm mt-1" onclick="fstAddExpenseRow()"><i class="bi bi-plus-lg me-1"></i>Add Cost</button>
             </div>
+            <div id="expenseRows"></div>
+            <button type="button" class="btn btn-light border btn-sm mt-1" onclick="fstAddExpenseRow()"><i class="bi bi-plus-lg me-1"></i>Add Cost</button>
+            @error('expenses')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
+            @error('expense_currency')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
         </div>
-    @endunless
+    </div>
 
     <div class="col-12">
         <h6 class="fw-bold text-body-secondary text-uppercase mt-2 mb-2" style="font-size:.72rem;letter-spacing:.06em"><i class="bi bi-diagram-3 me-1"></i>Payment Stage Plan</h6>
@@ -139,7 +139,7 @@
         <label class="form-label small fw-semibold">System price</label>
         <div class="input-group">
             <input type="number" step="0.01" min="0" name="price" id="priceInput" class="form-control" placeholder="0.00"
-                   value="{{ old('price', $system->price ?? '') }}">
+                   value="{{ old('price', $system->price ?? '') }}" readonly>
             <select name="price_currency" id="priceCurrency" class="form-select" style="max-width:90px">
                 @foreach(\App\Models\System::CURRENCIES as $currency)
                     <option value="{{ $currency }}" {{ old('price_currency', $system->price_currency ?? 'USD') === $currency ? 'selected' : '' }}>{{ $currency }}</option>
@@ -211,6 +211,25 @@
     </div>
 </form>
 
+@php
+    $initialExpenses = old('expenses');
+    if ($initialExpenses === null && isset($expenses) && $expenses->isNotEmpty()) {
+        $initialExpenses = $expenses->map(fn ($e) => [
+            'category' => $e->category,
+            'title' => $e->title,
+            'amount' => (float) $e->amount,
+        ])->toArray();
+    }
+
+    $initialMilestones = old('milestones');
+    if ($initialMilestones === null && isset($milestones) && $milestones->isNotEmpty()) {
+        $initialMilestones = $milestones->map(fn ($m) => [
+            'title' => $m->title,
+            'percentage' => (float) $m->percentage,
+        ])->toArray();
+    }
+@endphp
+
 <script>
     let fstExpenseIndex = 0;
     let fstMilestoneIndex = 0;
@@ -236,10 +255,13 @@
     function fstUpdateExpenseSummary() {
         const price = fstCurrentPrice();
         const el = document.getElementById('priceInput');
-        const totalEl = document.getElementById('expenseTotal'); // Note: Removed total display in this view, keeping logic
-        
+        const priceCurrency = document.getElementById('priceCurrency');
+
         if (el) {
             el.value = price.amount.toFixed(2);
+        }
+        if (priceCurrency && document.getElementById('expenseCurrency')) {
+            priceCurrency.value = document.getElementById('expenseCurrency').value;
         }
 
         fstUpdateMilestones();
@@ -308,7 +330,7 @@
         fstUpdateMilestones();
     }
 
-    function fstAddExpenseRow(category = 'hosting') {
+    function fstAddExpenseRow(category = 'hosting', title = '', amount = '') {
         const wrap = document.getElementById('expenseRows');
         const idx = fstExpenseIndex++;
         const row = document.createElement('div');
@@ -331,36 +353,67 @@
                 <button type="button" class="btn btn-sm btn-light border" title="Remove" onclick="this.closest('.expense-row').remove(); fstUpdateExpenseSummary();"><i class="bi bi-x-lg"></i></button>
             </div>`;
         row.querySelector('.expense-category').value = category;
+        row.querySelector('input[name*="[title]"]').value = title;
+        if (amount !== '') {
+            row.querySelector('.expense-amount').value = amount;
+        }
         wrap.appendChild(row);
         fstUpdateExpenseSummary();
     }
 
     const fstExpenseRows = document.getElementById('expenseRows');
+    const initialExpenses = @json($initialExpenses ?? [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     if (fstExpenseRows) {
         fstExpenseRows.addEventListener('input', fstUpdateExpenseSummary);
         fstExpenseRows.addEventListener('change', fstUpdateExpenseSummary);
-        document.getElementById('expenseCurrency').addEventListener('change', fstUpdateExpenseSummary);
+        document.getElementById('expenseCurrency')?.addEventListener('change', function() {
+            const priceCurrency = document.getElementById('priceCurrency');
+            if (priceCurrency) priceCurrency.value = this.value;
+            fstUpdateExpenseSummary();
+        });
 
-        fstAddExpenseRow('hosting');
-        fstAddExpenseRow('domain');
-        fstAddExpenseRow('setup_fee');
+        const expList = Array.isArray(initialExpenses) ? initialExpenses : Object.values(initialExpenses);
+        if (expList.length > 0) {
+            expList.forEach(exp => {
+                fstAddExpenseRow(exp.category || 'hosting', exp.title || '', exp.amount !== undefined ? exp.amount : '');
+            });
+        } else {
+            fstAddExpenseRow('hosting');
+            fstAddExpenseRow('domain');
+            fstAddExpenseRow('setup_fee');
+        }
     }
 
     const fstMilestoneRows = document.getElementById('milestoneRows');
+    const initialMilestones = @json($initialMilestones ?? [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     if (fstMilestoneRows) {
         fstMilestoneRows.addEventListener('input', fstUpdateMilestones);
         fstMilestoneRows.addEventListener('change', fstUpdateMilestones);
 
-        fstAddMilestoneRow('Start to build', 40);
-        fstAddMilestoneRow('Testing', 20);
-        fstAddMilestoneRow('Complete', 40);
+        const msList = Array.isArray(initialMilestones) ? initialMilestones : Object.values(initialMilestones);
+        if (msList.length > 0) {
+            msList.forEach(m => {
+                fstAddMilestoneRow(m.title || '', m.percentage !== undefined ? m.percentage : '');
+            });
+        } else {
+            fstAddMilestoneRow('Start to build', 40);
+            fstAddMilestoneRow('Testing', 20);
+            fstAddMilestoneRow('Complete', 40);
+        }
     }
 
-    document.getElementById('maintenanceAmount').addEventListener('input', fstUpdateMaintenanceSummary);
-    document.getElementById('maintenanceCycle').addEventListener('change', fstUpdateMaintenanceSummary);
+    document.getElementById('priceCurrency')?.addEventListener('change', function() {
+        const expenseCurrency = document.getElementById('expenseCurrency');
+        if (expenseCurrency) expenseCurrency.value = this.value;
+        fstUpdateExpenseSummary();
+    });
 
+    document.getElementById('maintenanceAmount')?.addEventListener('input', fstUpdateMaintenanceSummary);
+    document.getElementById('maintenanceCycle')?.addEventListener('change', fstUpdateMaintenanceSummary);
+
+    fstUpdateExpenseSummary();
     fstUpdateMaintenanceSummary();
     fstUpdateMilestones();
 </script>
