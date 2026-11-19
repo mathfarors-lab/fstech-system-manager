@@ -1,0 +1,777 @@
+@php
+    $invoiceNo = 'INV-'.str_pad((string) $system->id, 4, '0', STR_PAD_LEFT).'-'.now()->format('Ymd');
+    $currency = $system->price_currency ?: 'USD';
+    $hasPrice = $system->price !== null;
+    $paid = $hasPrice && $system->isFullyPaid();
+    $balance = $system->balanceDue();
+    $paidAmount = (float) $system->paid_amount;
+    $isPartial = $hasPrice && ! $paid && $paidAmount > 0;
+    $statusLabel = ! $hasPrice ? 'Pricing pending' : ($paid ? 'Paid in full' : ($isPartial ? 'Partially paid' : 'Balance due'));
+    $statusTone = ! $hasPrice ? 'pending' : ($paid ? 'paid' : ($isPartial ? 'partial' : 'due'));
+    $itemCount = max(1, $costs->count());
+    $settledStages = $milestones->filter(fn ($milestone) => $milestone->isPaid())->count();
+    $hasClientDetails = $system->client_name || $system->client_phone || $system->client_email || $system->client_telegram || $system->client_address;
+@endphp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoice {{ $invoiceNo }} — {{ $system->name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            background: #eef1f7;
+            color: #0f172a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 36px 16px 116px;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .invoice-sheet {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 32px 64px -32px rgba(15, 23, 42, .35), 0 0 0 1px rgba(15, 23, 42, .04);
+        }
+
+        .inv-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 28px 32px 32px;
+            background: linear-gradient(135deg, #0b0f24 0%, #161a3d 52%, #241a4e 100%);
+            color: #ffffff;
+        }
+        .inv-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .07);
+        }
+        .inv-ring-1 { width: 270px; height: 270px; top: -160px; right: 30%; }
+        .inv-ring-2 { width: 190px; height: 190px; bottom: -130px; left: 16%; }
+        .inv-hero-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .inv-brand { display: flex; align-items: center; }
+        .inv-brand-mark {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: .03em;
+            color: #ffffff;
+            background: linear-gradient(140deg, #6366f1, #8b5cf6 55%, #a855f7);
+            border: 1px solid rgba(255, 255, 255, .22);
+        }
+        .inv-brand-text strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+        }
+        .inv-brand-text small {
+            display: block;
+            margin-top: 3px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .52);
+        }
+        .inv-heading { text-align: right; }
+        .inv-doc {
+            font-size: 27px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        .inv-meta {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 11px;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, .68);
+        }
+        .inv-meta-label {
+            margin-right: 5px;
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .42);
+        }
+        .inv-meta-dot {
+            width: 3px;
+            height: 3px;
+            margin: 0 9px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+        .inv-status {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 13px;
+            padding: 5px 11px;
+            border: 1px solid transparent;
+            border-radius: 99px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+        .inv-status-dot {
+            width: 5px;
+            height: 5px;
+            margin-right: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .inv-status-paid { background: rgba(16, 185, 129, .15); border-color: rgba(52, 211, 153, .35); color: #6ee7b7; }
+        .inv-status-partial { background: rgba(245, 158, 11, .16); border-color: rgba(251, 191, 36, .35); color: #fcd34d; }
+        .inv-status-due { background: rgba(248, 113, 113, .14); border-color: rgba(252, 165, 165, .35); color: #fca5a5; }
+        .inv-status-pending { background: rgba(148, 163, 184, .14); border-color: rgba(203, 213, 225, .3); color: #cbd5e1; }
+        .inv-hero-accent {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6 55%, #a855f7);
+        }
+
+        .inv-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            padding: 28px 32px 24px;
+        }
+
+        .inv-parties { display: flex; align-items: stretch; }
+        .inv-parties > section { flex: 1 1 0; min-width: 0; }
+        .inv-parties > section + section { margin-left: 16px; }
+        .inv-card {
+            height: 100%;
+            padding: 16px 18px;
+            border: 1px solid #e6eaf2;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+        .inv-card-head { display: flex; align-items: center; margin-bottom: 11px; }
+        .inv-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 9px;
+            border-radius: 8px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 12px;
+        }
+        .inv-card-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .inv-client-name, .inv-project-name {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            color: #0f172a;
+            overflow-wrap: anywhere;
+        }
+        .inv-client-empty { font-size: 12.5px; font-weight: 500; color: #94a3b8; }
+        .inv-contact { list-style: none; margin: 9px 0 0; padding: 0; font-size: 12px; color: #475569; }
+        .inv-contact li { display: flex; align-items: flex-start; margin-top: 5px; line-height: 1.5; }
+        .inv-contact li i { width: 16px; flex: 0 0 16px; margin-top: 2px; font-size: 11px; color: #94a3b8; }
+        .inv-contact li span { min-width: 0; overflow-wrap: anywhere; }
+        .inv-tag-row { margin-top: 7px; }
+        .inv-tag {
+            display: inline-block;
+            margin: 3px 6px 0 0;
+            padding: 3px 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 99px;
+            background: #f1f5f9;
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            color: #475569;
+        }
+        .inv-desc { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: #64748b; }
+        .inv-terms { margin-top: 12px; padding-top: 11px; border-top: 1px dashed #e2e8f0; }
+        .inv-terms p { margin: 4px 0 0; font-size: 12px; line-height: 1.55; color: #475569; white-space: pre-line; }
+
+        .inv-section { margin-top: 24px; }
+        .inv-section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 9px;
+        }
+        .inv-section-head h2 {
+            margin: 0;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .inv-section-meta { font-size: 11px; font-weight: 500; color: #94a3b8; }
+
+        .inv-table { width: 100%; border-collapse: collapse; }
+        .inv-table th {
+            padding: 0 12px 8px;
+            border-bottom: 1px solid #e6eaf2;
+            text-align: left;
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #94a3b8;
+        }
+        .inv-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f4f9;
+            vertical-align: top;
+            font-size: 12.5px;
+            color: #334155;
+        }
+        .inv-table tbody tr:last-child td { border-bottom: 1px solid #e6eaf2; }
+        .inv-index { width: 38px; font-size: 11px; font-weight: 600; color: #b6c0cf; }
+        .inv-item-title { font-weight: 600; color: #0f172a; }
+        .inv-item-sub { margin-top: 2px; font-size: 11.5px; line-height: 1.5; color: #7c8798; }
+        .inv-amount { font-weight: 600; color: #0f172a; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .inv-right { text-align: right; }
+        .inv-muted { color: #8b96a7; }
+
+        .inv-table-stages td { padding: 10px 12px; font-size: 12px; }
+        .inv-stage-name { font-weight: 600; color: #1e293b; }
+        .inv-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 9px;
+            border: 1px solid transparent;
+            border-radius: 99px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .inv-chip-dot { width: 4px; height: 4px; margin-right: 5px; border-radius: 50%; background: currentColor; }
+        .inv-chip-paid { background: #ecfdf5; border-color: #bbf7d0; color: #047857; }
+        .inv-chip-wait { background: #f8fafc; border-color: #e2e8f0; color: #64748b; }
+        .inv-stage-date { display: block; margin-top: 4px; font-size: 10px; font-weight: 500; color: #94a3b8; }
+
+        .inv-summary { display: flex; justify-content: flex-end; margin-top: 18px; }
+        .inv-summary-card {
+            width: 322px;
+            max-width: 100%;
+            padding: 14px 16px 16px;
+            border: 1px solid #e6eaf2;
+            border-radius: 14px;
+            background: #f8fafc;
+        }
+        .inv-sum-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 5px 0;
+            font-size: 12.5px;
+            color: #64748b;
+        }
+        .inv-sum-row strong { font-weight: 600; color: #1e293b; font-variant-numeric: tabular-nums; }
+        .inv-sum-row strong.inv-green { color: #059669; }
+        .inv-sum-divider { height: 1px; margin: 8px 0 10px; background: #e6eaf2; }
+        .inv-balance {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+        }
+        .inv-balance span {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }
+        .inv-balance strong {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -.01em;
+            font-variant-numeric: tabular-nums;
+        }
+        .inv-balance-paid { background: #ecfdf5; border-color: #bbf7d0; color: #047857; }
+        .inv-balance-due, .inv-balance-partial {
+            background: linear-gradient(135deg, #111633, #1d1a46);
+            border-color: rgba(255, 255, 255, .08);
+            color: #ffffff;
+        }
+        .inv-balance-due span, .inv-balance-partial span { color: rgba(255, 255, 255, .72); }
+        .inv-balance-pending { background: #f1f5f9; border-color: #e2e8f0; color: #475569; }
+        .inv-sum-note { margin-top: 10px; font-size: 9.5px; letter-spacing: .05em; text-align: center; color: #94a3b8; }
+
+        .inv-note {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 14px;
+            padding: 13px 15px;
+            border: 1px solid #e6eaf2;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+        .inv-note-indigo { background: #f5f3ff; border-color: #e7e2ff; }
+        .inv-note-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 11px;
+            border: 1px solid #e6eaf2;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #6366f1;
+            font-size: 11px;
+        }
+        .inv-note-title {
+            margin-bottom: 3px;
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .inv-note-body { font-size: 12px; line-height: 1.6; color: #475569; }
+        .inv-pre { white-space: pre-line; }
+
+        .inv-footer { margin-top: auto; padding-top: 26px; }
+        .inv-footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 14px;
+            border-top: 1px solid #e6eaf2;
+        }
+        .inv-thanks { font-size: 12.5px; font-weight: 600; color: #334155; }
+        .inv-footer-meta { margin-top: 3px; font-size: 10.5px; color: #94a3b8; }
+        .inv-footer-ref { font-size: 9.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; }
+
+        .inv-actions {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            z-index: 50;
+            transform: translateX(-50%);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            max-width: calc(100% - 24px);
+            padding: 8px;
+            border: 1px solid #dfe3ec;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .94);
+            box-shadow: 0 18px 40px -18px rgba(15, 23, 42, .38);
+            backdrop-filter: blur(12px);
+        }
+        .inv-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 9px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 9px;
+            background: #ffffff;
+            color: #334155;
+            font-family: inherit;
+            font-size: 12.5px;
+            font-weight: 600;
+            line-height: 1.2;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+        }
+        .inv-btn:hover { background: #f8fafc; color: #0f172a; }
+        .inv-btn i { font-size: 13px; }
+        .inv-btn:disabled { opacity: .7; cursor: progress; }
+        .inv-btn-primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6 60%, #a855f7);
+            color: #ffffff;
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, .7);
+        }
+        .inv-btn-primary:hover {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6 60%, #a855f7);
+            color: #ffffff;
+            filter: brightness(1.05);
+        }
+        .inv-spinner {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border: 2px solid rgba(15, 23, 42, .18);
+            border-top-color: #0f172a;
+            border-radius: 50%;
+            animation: invSpin .7s linear infinite;
+        }
+        @keyframes invSpin { to { transform: rotate(360deg); } }
+
+        @page { size: A4 portrait; margin: 0; }
+
+        @media print {
+            body { padding: 0; background: #ffffff; }
+            .invoice-sheet {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .no-print { display: none !important; }
+            .inv-card, .inv-note, .inv-summary, .inv-parties, .inv-footer { break-inside: avoid; page-break-inside: avoid; }
+            .inv-section-head { break-after: avoid; page-break-after: avoid; }
+        }
+
+        @media (max-width: 760px) {
+            body { padding: 0 0 118px; background: #ffffff; }
+            .invoice-sheet { width: 100%; min-height: 0; border-radius: 0; box-shadow: none; }
+            .inv-hero { padding: 22px 20px 26px; }
+            .inv-hero-inner { flex-direction: column; }
+            .inv-heading { margin-top: 20px; text-align: left; }
+            .inv-meta { justify-content: flex-start; }
+            .inv-doc { font-size: 24px; }
+            .inv-status { margin-top: 11px; }
+            .inv-body { padding: 22px 18px 24px; }
+            .inv-parties { flex-direction: column; }
+            .inv-parties > section + section { margin-left: 0; margin-top: 12px; }
+            .inv-summary { justify-content: stretch; }
+            .inv-summary-card { width: 100%; }
+            .inv-hide-sm { display: none; }
+            .inv-footer-inner { flex-direction: column; align-items: flex-start; }
+            .inv-footer-ref { margin-top: 8px; }
+            .inv-actions {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                transform: none;
+                max-width: none;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 7px;
+                padding: 7px;
+                border-radius: 13px;
+            }
+            .inv-btn { width: 100%; padding: 10px 8px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="invoice-sheet">
+    <header class="inv-hero">
+        <span class="inv-ring inv-ring-1" aria-hidden="true"></span>
+        <span class="inv-ring inv-ring-2" aria-hidden="true"></span>
+        <div class="inv-hero-inner">
+            <div class="inv-brand">
+                <x-brand-logo variant="mark" :height="46" alt="FS Tech Systems" />
+                <span class="inv-brand-text ms-2" style="margin-left: 12px;">
+                    <strong style="font-size: 17px; letter-spacing: -0.01em;">FS Tech Systems</strong>
+                    <small style="color: rgba(255,255,255,0.7); font-size: 11px;">Software Engineering & System Architecture</small>
+                </span>
+            </div>
+            <div class="inv-heading">
+                <div class="inv-doc">Invoice</div>
+                <div class="inv-meta">
+                    <span><span class="inv-meta-label">No.</span> {{ $invoiceNo }}</span>
+                    <span class="inv-meta-dot"></span>
+                    <span><span class="inv-meta-label">Issued</span> {{ now()->format('M j, Y') }}</span>
+                </div>
+                <span class="inv-status inv-status-{{ $statusTone }}">
+                    <span class="inv-status-dot"></span>{{ $statusLabel }}
+                </span>
+            </div>
+        </div>
+        <span class="inv-hero-accent" aria-hidden="true"></span>
+    </header>
+
+    <main class="inv-body">
+        <div class="inv-parties">
+            <section class="inv-card">
+                <div class="inv-card-head">
+                    <span class="inv-icon"><i class="bi bi-person-badge"></i></span>
+                    <span class="inv-card-label">Billed to</span>
+                </div>
+                @if($hasClientDetails)
+                    <div class="inv-client-name">{{ $system->client_name ?: 'Client' }}</div>
+                    <ul class="inv-contact">
+                        @if($system->client_phone)
+                            <li><i class="bi bi-telephone"></i><span>{{ $system->client_phone }}</span></li>
+                        @endif
+                        @if($system->client_email)
+                            <li><i class="bi bi-envelope"></i><span>{{ $system->client_email }}</span></li>
+                        @endif
+                        @if($system->client_telegram)
+                            <li><i class="bi bi-telegram"></i><span>{{ $system->client_telegram }}</span></li>
+                        @endif
+                        @if($system->client_address)
+                            <li><i class="bi bi-geo-alt"></i><span class="inv-pre">{{ $system->client_address }}</span></li>
+                        @endif
+                    </ul>
+                @else
+                    <div class="inv-client-empty">Client details not recorded</div>
+                @endif
+            </section>
+
+            <section class="inv-card">
+                <div class="inv-card-head">
+                    <span class="inv-icon"><i class="bi bi-layers"></i></span>
+                    <span class="inv-card-label">Project</span>
+                </div>
+                <div class="inv-project-name">{{ $system->name }}</div>
+                <div class="inv-tag-row">
+                    <span class="inv-tag">{{ $system->stackLabel() }}</span>
+                </div>
+                @if($system->description)
+                    <p class="inv-desc">{{ \Illuminate\Support\Str::limit($system->description, 170) }}</p>
+                @endif
+                @if($system->payment_notes)
+                    <div class="inv-terms">
+                        <span class="inv-card-label">Payment terms</span>
+                        <p>{{ $system->payment_notes }}</p>
+                    </div>
+                @endif
+            </section>
+        </div>
+
+        <section class="inv-section">
+            <div class="inv-section-head">
+                <h2>Line items</h2>
+                <span class="inv-section-meta">{{ $itemCount }} {{ \Illuminate\Support\Str::plural('item', $itemCount) }}</span>
+            </div>
+            <table class="inv-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Description</th>
+                    <th class="inv-right">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($costs as $cost)
+                    <tr>
+                        <td class="inv-index">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
+                        <td>
+                            <div class="inv-item-title">{{ $cost->categoryLabel() }}</div>
+                            @if($cost->title && $cost->title !== $cost->categoryLabel())
+                                <div class="inv-item-sub">{{ $cost->title }}</div>
+                            @endif
+                        </td>
+                        <td class="inv-right inv-amount">{{ \App\Models\System::formatMoney((float) $cost->amount, $cost->currency ?: $currency) }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="inv-index">01</td>
+                        <td>
+                            <div class="inv-item-title">System build &amp; development</div>
+                            @if($system->description && strlen($system->description) <= 80)
+                                <div class="inv-item-sub">{{ $system->description }}</div>
+                            @endif
+                        </td>
+                        <td class="inv-right inv-amount">{{ $system->formatPrice() }}</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </section>
+
+        <div class="inv-summary">
+            <div class="inv-summary-card">
+                <div class="inv-sum-row">
+                    <span>Total</span>
+                    <strong>{{ $system->formatPrice() }}</strong>
+                </div>
+                <div class="inv-sum-row">
+                    <span>Amount paid</span>
+                    <strong class="{{ $paidAmount > 0 ? 'inv-green' : '' }}">{{ $paidAmount > 0 ? '− ' : '' }}{{ \App\Models\System::formatMoney($paidAmount, $currency) }}</strong>
+                </div>
+                <div class="inv-sum-divider"></div>
+                <div class="inv-balance inv-balance-{{ $statusTone }}">
+                    <span>{{ $paid ? 'Balance' : 'Balance due' }}</span>
+                    <strong>{{ $paid ? \App\Models\System::formatMoney(0, $currency) : ($balance === null ? '—' : \App\Models\System::formatMoney($balance, $currency)) }}</strong>
+                </div>
+                <div class="inv-sum-note">All totals in {{ $currency }}</div>
+            </div>
+        </div>
+
+        @if($milestones->isNotEmpty())
+            <section class="inv-section">
+                <div class="inv-section-head">
+                    <h2>Payment stages</h2>
+                    <span class="inv-section-meta">{{ $settledStages }} of {{ $milestones->count() }} settled</span>
+                </div>
+                <table class="inv-table inv-table-stages">
+                    <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th class="inv-right inv-hide-sm">Share</th>
+                        <th class="inv-right">Amount</th>
+                        <th class="inv-right">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($milestones as $milestone)
+                        <tr>
+                            <td><span class="inv-stage-name">{{ $milestone->title }}</span></td>
+                            <td class="inv-right inv-hide-sm inv-muted">{{ rtrim(rtrim(number_format((float) $milestone->percentage, 2), '0'), '.') }}%</td>
+                            <td class="inv-right inv-amount">{{ $milestone->formatAmount() }}</td>
+                            <td class="inv-right">
+                                @if($milestone->isPaid())
+                                    <span class="inv-chip inv-chip-paid"><span class="inv-chip-dot"></span>Paid</span>
+                                    @if($milestone->paid_at)
+                                        <span class="inv-stage-date">{{ $milestone->paid_at->format('M j, Y') }}</span>
+                                    @endif
+                                @else
+                                    <span class="inv-chip inv-chip-wait"><span class="inv-chip-dot"></span>Pending</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </section>
+        @endif
+
+        @if($system->maintenance_amount !== null && $system->maintenance_amount > 0)
+            <div class="inv-note inv-note-indigo">
+                <span class="inv-note-icon"><i class="bi bi-arrow-repeat"></i></span>
+                <div>
+                    <div class="inv-note-title">Maintenance</div>
+                    <div class="inv-note-body">
+                        {{ \App\Models\System::formatMoney((float) $system->maintenance_amount, $currency) }}
+                        @if($system->maintenance_cycle)
+                            {{ strtolower($system->maintenanceCycleLabel()) }}
+                        @endif
+                        @if($system->maintenance_starts_at)
+                            — starting {{ $system->maintenance_starts_at->format('M j, Y') }}
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if($system->notes)
+            <div class="inv-note">
+                <span class="inv-note-icon"><i class="bi bi-journal-text"></i></span>
+                <div>
+                    <div class="inv-note-title">Notes</div>
+                    <div class="inv-note-body inv-pre">{{ $system->notes }}</div>
+                </div>
+            </div>
+        @endif
+
+        <footer class="inv-footer">
+            <div class="inv-footer-inner" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <div class="inv-thanks">{{ $paid ? 'Thank you — this invoice is settled in full.' : 'Thank you for your business.' }}</div>
+                    <div class="inv-footer-meta" style="margin-top: 6px; line-height: 1.6;">
+                        <strong>FS Tech Systems</strong> · Professional Digital Solutions<br>
+                        <span><i class="bi bi-telephone-fill" style="margin-right: 4px;"></i> 0967444964</span>
+                        <span style="margin: 0 8px;">·</span>
+                        <span><i class="bi bi-envelope-fill" style="margin-right: 4px;"></i> mathfarors@gmail.com</span>
+                        <span style="margin: 0 8px;">·</span>
+                        <span><i class="bi bi-telegram" style="margin-right: 4px;"></i> t.me/farors07</span>
+                        <span style="margin: 0 8px;">·</span>
+                        <span><i class="bi bi-facebook" style="margin-right: 4px;"></i> FS Tech Systems</span>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="inv-footer-ref">{{ $invoiceNo }}</div>
+                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Generated {{ now()->format('M j, Y') }}</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+</div>
+
+<div class="inv-actions no-print" role="toolbar" aria-label="Invoice actions">
+    <a href="{{ route('systems.show', [$system, 'tab' => 'finance']) }}" class="inv-btn"><i class="bi bi-arrow-left"></i>Back</a>
+    <button type="button" class="inv-btn" id="saveImageBtn" onclick="fstSaveInvoiceImage(this)"><i class="bi bi-image"></i>Save image</button>
+    <a href="{{ route('systems.invoice.pdf', $system) }}" class="inv-btn"><i class="bi bi-file-earmark-pdf"></i>PDF</a>
+    <button type="button" class="inv-btn inv-btn-primary" onclick="window.print()"><i class="bi bi-printer"></i>Print invoice</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+    async function fstSaveInvoiceImage(btn) {
+        const original = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="inv-spinner"></span>Rendering...';
+
+        try {
+            if (document.fonts && document.fonts.ready) {
+                await document.fonts.ready;
+            }
+            await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+            const sheet = document.querySelector('.invoice-sheet');
+            const canvas = await html2canvas(sheet, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true,
+                windowWidth: sheet.scrollWidth,
+            });
+
+            const link = document.createElement('a');
+            link.download = 'invoice-{{ $system->slug }}-{{ now()->format('Ymd') }}.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        } catch (error) {
+            alert('Could not create the image. Please try printing or saving as PDF instead.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = original;
+        }
+    }
+</script>
+
+@if($autoPrint)
+<script>window.addEventListener('load', () => window.print());</script>
+@endif
+</body>
+</html>
