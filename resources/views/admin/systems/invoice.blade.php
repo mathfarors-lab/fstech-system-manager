@@ -320,76 +320,76 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 14px;
+            margin-top: 18px;
         }
         .inv-khqr-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 22px 14px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
+            padding: 12px 28px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 18px;
             background: #ffffff;
             text-align: center;
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
         }
         .inv-khqr-top {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 7px;
+            gap: 10px;
+            margin-bottom: 8px;
         }
         .inv-khqr-pill {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 5px;
+            padding: 4px 12px;
+            border-radius: 6px;
             background: #e11d48;
             color: #ffffff;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 800;
             letter-spacing: .08em;
             line-height: 1.2;
         }
         .inv-khqr-lbl {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
-            letter-spacing: .06em;
+            letter-spacing: .08em;
         }
         .inv-khqr-body {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 3px;
+            padding: 4px;
             background: #ffffff;
         }
         .inv-khqr-img {
-            max-height: 135px;
+            max-height: 200px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
-            border-radius: 6px;
+            border-radius: 8px;
         }
         .inv-khqr-foot {
-            margin-top: 7px;
-            line-height: 1.25;
+            margin-top: 8px;
+            line-height: 1.3;
         }
         .inv-khqr-name {
             display: block;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 800;
             color: #0f172a;
             letter-spacing: .02em;
         }
         .inv-khqr-note {
             display: block;
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
             margin-top: 2px;
-            font-weight: 500;
+            font-weight: 600;
         }
         .inv-totals-card {
             flex: 0 0 320px;
@@ -881,14 +881,14 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                margin-top: 10px !important;
+                margin-top: 12px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 8px 24px 10px !important;
-                border: 1.5px solid #cbd5e1 !important;
-                border-radius: 12px !important;
+                padding: 10px 28px 12px !important;
+                border: 2px solid #cbd5e1 !important;
+                border-radius: 14px !important;
                 background: #ffffff !important;
                 text-align: center !important;
                 display: flex !important;
@@ -903,12 +903,12 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 6px !important;
+                gap: 8px !important;
                 margin-bottom: 4px !important;
             }
             .inv-khqr-pill {
-                padding: 2.5px 8px !important;
-                font-size: 9.5px !important;
+                padding: 2.5px 9px !important;
+                font-size: 11px !important;
                 font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
@@ -916,24 +916,28 @@
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 9.5px !important;
+                font-size: 11px !important;
                 font-weight: 700 !important;
+                color: #475569 !important;
+                letter-spacing: .08em !important;
             }
             .inv-khqr-img {
-                max-height: 140px !important;
+                max-height: 180px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 4px !important;
+                margin-top: 5px !important;
             }
             .inv-khqr-name {
-                font-size: 11.5px !important;
+                font-size: 13px !important;
                 font-weight: 800 !important;
+                color: #0f172a !important;
             }
             .inv-khqr-note {
-                font-size: 9px !important;
+                font-size: 10px !important;
                 font-weight: 600 !important;
                 margin-top: 1px !important;
+                color: #64748b !important;
             }
             .inv-summary-card {
                 width: 290px !important;
@@ -1282,23 +1286,6 @@
             </div>
         </div>
 
-        {{-- Centered KHQR Underneath Payment Stages & Totals --}}
-        <div class="inv-khqr-center-wrap">
-            <div class="inv-khqr-card">
-                <div class="inv-khqr-top">
-                    <span class="inv-khqr-pill">KHQR</span>
-                    <span class="inv-khqr-lbl">Scan to pay</span>
-                </div>
-                <div class="inv-khqr-body">
-                    <img src="{{ asset('images/khqr-payment.jpg') }}" alt="KHQR Payment" class="inv-khqr-img">
-                </div>
-                <div class="inv-khqr-foot">
-                    <strong class="inv-khqr-name">FARORS MATH</strong>
-                    <small class="inv-khqr-note">Bakong · Individual</small>
-                </div>
-            </div>
-        </div>
-
         @if($system->maintenance_amount !== null && $system->maintenance_amount > 0)
             <div class="inv-note inv-note-indigo">
                 <span class="inv-note-icon"><i class="bi bi-arrow-repeat"></i></span>
@@ -1326,6 +1313,23 @@
                 </div>
             </div>
         @endif
+
+        {{-- Centered KHQR Underneath Maintenance & Notes --}}
+        <div class="inv-khqr-center-wrap">
+            <div class="inv-khqr-card">
+                <div class="inv-khqr-top">
+                    <span class="inv-khqr-pill">KHQR</span>
+                    <span class="inv-khqr-lbl">Scan to pay</span>
+                </div>
+                <div class="inv-khqr-body">
+                    <img src="{{ asset('images/khqr-payment.jpg') }}" alt="KHQR Payment" class="inv-khqr-img">
+                </div>
+                <div class="inv-khqr-foot">
+                    <strong class="inv-khqr-name">FARORS MATH</strong>
+                    <small class="inv-khqr-note">Bakong · Individual</small>
+                </div>
+            </div>
+        </div>
 
         <footer class="inv-footer">
             <div class="inv-footer-inner" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
