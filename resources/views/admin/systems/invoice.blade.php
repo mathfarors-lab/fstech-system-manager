@@ -1400,10 +1400,7 @@
                         <strong>FS Tech Systems</strong> · Professional Digital Solutions<br>
                         <span><i class="bi bi-telephone-fill" style="margin-right: 4px;"></i> 0967444964</span>
                         <span style="margin: 0 8px;">·</span>
-                        <span><i class="bi bi-envelope-fill" style="margin-right: 4px;"></i> mathfarors@gmail.com</span><br>
-                        <span><i class="bi bi-telegram" style="margin-right: 4px;"></i> t.me/farors07</span>
-                        <span style="margin: 0 8px;">·</span>
-                        <span><i class="bi bi-facebook" style="margin-right: 4px;"></i> FS Tech Systems</span>
+                        <span><i class="bi bi-envelope-fill" style="margin-right: 4px;"></i> mathfarors@gmail.com</span>
                     </div>
                 </div>
 
@@ -1417,11 +1414,6 @@
                         <img src="{{ asset('images/facebook-qr.png') }}" alt="Facebook QR">
                         <span>Facebook</span>
                     </a>
-                </div>
-
-                <div style="text-align: right;">
-                    <div class="inv-footer-ref">{{ $invoiceNo }}</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Generated {{ now()->format('M j, Y') }}</div>
                 </div>
             </div>
         </footer>
