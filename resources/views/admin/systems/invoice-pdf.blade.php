@@ -192,37 +192,37 @@ $payMoney = function ($amount, $cur) {
     @endif
 
     {{-- Centered KHQR Underneath Maintenance & Notes --}}
-    <table class="noborder" style="width:100%; margin-top:6px; page-break-inside:avoid">
+    <table class="noborder" style="width:100%; margin-top:5px; page-break-inside:avoid">
         <tr>
             <td class="noborder" style="text-align:center; vertical-align:middle">
-                <div class="box" style="display:inline-block; padding:8px 22px; text-align:center">
-                    <div style="background-color:#e11d48; color:#ffffff; font-size:10px; font-weight:bold; letter-spacing:1px; padding:3px 10px; border-radius:3px; display:inline-block; margin-bottom:4px">KHQR</div>
-                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:155px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
-                    <strong style="font-size:11px; display:block; margin-top:4px; color:#111827">FARORS MATH</strong>
-                    <span class="muted" style="font-size:9px; display:block">Scan to Pay</span>
+                <div class="box" style="display:inline-block; padding:5px 16px; text-align:center">
+                    <div style="background-color:#e11d48; color:#ffffff; font-size:8.5px; font-weight:bold; letter-spacing:1px; padding:2px 7px; border-radius:3px; display:inline-block; margin-bottom:2px">KHQR</div>
+                    <img src="{{ str_replace('\\', '/', public_path('images/khqr-payment.jpg')) }}" style="height:100px; width:auto; max-width:100%; object-fit:contain; display:block; margin:0 auto">
+                    <strong style="font-size:9.5px; display:block; margin-top:2px; color:#111827">FARORS MATH</strong>
+                    <span class="muted" style="font-size:8px; display:block">Scan to Pay</span>
                 </div>
             </td>
         </tr>
     </table>
 
     {{-- Provider & Brand Contact Info --}}
-    <table class="noborder" style="margin-top:8px; padding-top:6px; border-top:1px solid #e5e7eb; width:100%; page-break-inside:avoid">
+    <table class="noborder" style="margin-top:6px; padding-top:4px; border-top:1px solid #e5e7eb; width:100%; page-break-inside:avoid">
         <tr>
             <td class="noborder" style="width:65%; vertical-align:middle">
-                <strong style="color:#4f46e5; font-size:11.5px">FS Tech Systems</strong><br>
+                <strong style="color:#4f46e5; font-size:11px">FS Tech Systems</strong><br>
                 <span class="muted" style="font-size:8.5px">Professional Software & Digital Solutions</span><br>
                 <span style="font-size:8.5px; color:#4b5563">
                     Phone: 0967444964 &nbsp;|&nbsp; Email: mathfarors@gmail.com
                 </span>
             </td>
             <td class="noborder right" style="width:35%; vertical-align:middle; text-align:right">
-                <div style="display:inline-block; margin-right:12px; text-align:center; vertical-align:middle">
-                    <img src="{{ str_replace('\\', '/', public_path('images/telegram-qr.png')) }}" style="height:58px; width:auto; display:block; margin:0 auto">
-                    <span style="font-size:7px; color:#4f46e5; font-weight:bold; display:block; margin-top:2px">Telegram</span>
+                <div style="display:inline-block; margin-right:10px; text-align:center; vertical-align:middle">
+                    <img src="{{ str_replace('\\', '/', public_path('images/telegram-qr.png')) }}" style="height:44px; width:auto; display:block; margin:0 auto">
+                    <span style="font-size:6.5px; color:#4f46e5; font-weight:bold; display:block; margin-top:2px">Telegram</span>
                 </div>
                 <div style="display:inline-block; text-align:center; vertical-align:middle">
-                    <img src="{{ str_replace('\\', '/', public_path('images/facebook-qr.png')) }}" style="height:58px; width:auto; display:block; margin:0 auto">
-                    <span style="font-size:7px; color:#4f46e5; font-weight:bold; display:block; margin-top:2px">Facebook</span>
+                    <img src="{{ str_replace('\\', '/', public_path('images/facebook-qr.png')) }}" style="height:44px; width:auto; display:block; margin:0 auto">
+                    <span style="font-size:6.5px; color:#4f46e5; font-weight:bold; display:block; margin-top:2px">Facebook</span>
                 </div>
             </td>
         </tr>

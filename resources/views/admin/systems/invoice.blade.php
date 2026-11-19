@@ -327,33 +327,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 16px 36px 20px;
+            padding: 8px 24px 10px;
             border: 2px solid #e2e8f0;
-            border-radius: 18px;
+            border-radius: 14px;
             background: #ffffff;
             text-align: center;
-            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.06);
         }
         .inv-khqr-top {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 8px;
+            margin-bottom: 6px;
         }
         .inv-khqr-pill {
             display: inline-block;
-            padding: 5px 14px;
-            border-radius: 6px;
+            padding: 3px 10px;
+            border-radius: 5px;
             background: #e11d48;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 11.5px;
             font-weight: 800;
             letter-spacing: .08em;
             line-height: 1.2;
         }
         .inv-khqr-lbl {
-            font-size: 14px;
+            font-size: 11.5px;
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
@@ -363,32 +363,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6px;
+            padding: 4px;
             background: #ffffff;
         }
         .inv-khqr-img {
-            max-height: 270px;
+            max-height: 145px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 6px;
         }
         .inv-khqr-foot {
-            margin-top: 10px;
-            line-height: 1.35;
+            margin-top: 6px;
+            line-height: 1.25;
         }
         .inv-khqr-name {
             display: block;
-            font-size: 17px;
+            font-size: 13.5px;
             font-weight: 800;
             color: #0f172a;
             letter-spacing: .02em;
         }
         .inv-khqr-note {
             display: block;
-            font-size: 12px;
+            font-size: 10.5px;
             color: #64748b;
-            margin-top: 3px;
+            margin-top: 1px;
             font-weight: 600;
         }
         .inv-totals-card {
@@ -482,12 +482,12 @@
         .inv-note-body { font-size: 13.5px; line-height: 1.6; color: #334155; }
         .inv-pre { white-space: pre-line; }
 
-        .inv-footer { margin-top: auto; padding-top: 26px; }
+        .inv-footer { margin-top: auto; padding-top: 20px; flex-shrink: 0; }
         .inv-footer-inner {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            padding-top: 16px;
+            padding-top: 14px;
             border-top: 2px solid #e2e8f0;
         }
         .inv-thanks { font-size: 15px; font-weight: 700; color: #1e293b; }
@@ -497,34 +497,36 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-shrink: 0;
         }
         .inv-footer-qr-item {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            padding: 5px 8px;
-            border-radius: 10px;
+            padding: 4px 6px;
+            border-radius: 8px;
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             transition: transform .15s ease, box-shadow .15s ease;
+            flex-shrink: 0;
         }
         .inv-footer-qr-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
         }
         .inv-footer-qr-item img {
-            height: 78px;
+            height: 62px;
             width: auto;
             object-fit: contain;
             border-radius: 6px;
         }
         .inv-footer-qr-item span {
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 700;
             color: #4f46e5;
-            margin-top: 4px;
+            margin-top: 3px;
             letter-spacing: .02em;
         }
 
@@ -724,11 +726,11 @@
                 color: #fecaca !important;
             }
             .inv-body {
-                padding: 18px 28px 16px !important;
+                padding: 14px 28px 12px !important;
                 flex: 1 1 auto !important;
                 display: flex !important;
                 flex-direction: column !important;
-                justify-content: flex-start !important;
+                justify-content: space-between !important;
                 overflow: hidden !important;
             }
             .inv-parties {
@@ -819,7 +821,7 @@
                 margin: 2px 0 0 !important;
             }
             .inv-section {
-                margin-top: 14px !important;
+                margin-top: 10px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -884,8 +886,8 @@
                 flex-direction: row !important;
                 align-items: stretch !important;
                 justify-content: space-between !important;
-                gap: 14px !important;
-                margin-top: 12px !important;
+                gap: 12px !important;
+                margin-top: 8px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -895,7 +897,7 @@
             .inv-stages-card {
                 flex: 1 1 0 !important;
                 min-width: 0 !important;
-                padding: 8px 12px !important;
+                padding: 6px 10px !important;
                 border: 1.5px solid #cbd5e1 !important;
                 border-radius: 10px !important;
                 background: #ffffff !important;
@@ -904,7 +906,7 @@
             }
             .inv-totals-card {
                 flex: 0 0 280px !important;
-                padding: 8px 14px !important;
+                padding: 6px 12px !important;
                 background: #f8fafc !important;
                 border: 1.5px solid #cbd5e1 !important;
                 border-radius: 10px !important;
@@ -915,14 +917,14 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                margin-top: 12px !important;
+                margin-top: 6px !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
             .inv-khqr-card {
-                padding: 10px 32px 12px !important;
-                border: 2px solid #cbd5e1 !important;
-                border-radius: 14px !important;
+                padding: 6px 20px 8px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 10px !important;
                 background: #ffffff !important;
                 text-align: center !important;
                 display: flex !important;
@@ -937,12 +939,12 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 8px !important;
-                margin-bottom: 4px !important;
+                gap: 6px !important;
+                margin-bottom: 2px !important;
             }
             .inv-khqr-pill {
-                padding: 3px 11px !important;
-                font-size: 12px !important;
+                padding: 2px 8px !important;
+                font-size: 10px !important;
                 font-weight: 800 !important;
                 background: #e11d48 !important;
                 color: #ffffff !important;
@@ -950,25 +952,25 @@
                 print-color-adjust: exact !important;
             }
             .inv-khqr-lbl {
-                font-size: 12px !important;
+                font-size: 10px !important;
                 font-weight: 700 !important;
                 color: #475569 !important;
                 letter-spacing: .08em !important;
             }
             .inv-khqr-img {
-                max-height: 235px !important;
+                max-height: 125px !important;
                 width: auto !important;
             }
             .inv-khqr-foot {
-                margin-top: 6px !important;
+                margin-top: 3px !important;
             }
             .inv-khqr-name {
-                font-size: 14.5px !important;
+                font-size: 12px !important;
                 font-weight: 800 !important;
                 color: #0f172a !important;
             }
             .inv-khqr-note {
-                font-size: 10.5px !important;
+                font-size: 9.5px !important;
                 font-weight: 600 !important;
                 margin-top: 1px !important;
                 color: #64748b !important;
@@ -1073,7 +1075,8 @@
             }
             .inv-footer {
                 margin-top: auto !important;
-                padding-top: 10px !important;
+                padding-top: 6px !important;
+                flex-shrink: 0 !important;
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -1082,7 +1085,7 @@
                 flex-direction: row !important;
                 justify-content: space-between !important;
                 align-items: flex-end !important;
-                padding-top: 8px !important;
+                padding-top: 6px !important;
                 border-top: 1.5px solid #cbd5e1 !important;
             }
             .inv-thanks {
@@ -1102,29 +1105,31 @@
             .inv-footer-qrs {
                 display: flex !important;
                 align-items: center !important;
-                gap: 12px !important;
+                gap: 10px !important;
+                flex-shrink: 0 !important;
             }
             .inv-footer-qr-item {
                 display: inline-flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                padding: 3px 6px !important;
+                padding: 2px 5px !important;
                 border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
+                border-radius: 6px !important;
                 background: #ffffff !important;
                 box-shadow: none !important;
+                flex-shrink: 0 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .inv-footer-qr-item img {
-                height: 68px !important;
+                height: 48px !important;
                 width: auto !important;
             }
             .inv-footer-qr-item span {
-                font-size: 9px !important;
+                font-size: 8px !important;
                 font-weight: 700 !important;
                 color: #4f46e5 !important;
-                margin-top: 2px !important;
+                margin-top: 1px !important;
             }
             .no-print {
                 display: none !important;
